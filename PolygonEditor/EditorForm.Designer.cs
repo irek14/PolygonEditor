@@ -1,6 +1,6 @@
 ﻿namespace PolygonEditor
 {
-    partial class MainForm
+    partial class EditorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,9 @@
             this.MainTable = new System.Windows.Forms.TableLayoutPanel();
             this.Canvas = new System.Windows.Forms.Panel();
             this.ToolboxPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.ClearAllButton = new System.Windows.Forms.Button();
             this.MainTable.SuspendLayout();
+            this.ToolboxPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTable
@@ -57,12 +59,16 @@
             this.Canvas.Name = "Canvas";
             this.Canvas.Size = new System.Drawing.Size(886, 647);
             this.Canvas.TabIndex = 0;
+            this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
+            this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
+            this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
             // ToolboxPanel
             // 
             this.ToolboxPanel.ColumnCount = 2;
             this.ToolboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.ToolboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.ToolboxPanel.Controls.Add(this.ClearAllButton, 0, 0);
             this.ToolboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolboxPanel.Location = new System.Drawing.Point(3, 3);
             this.ToolboxPanel.Name = "ToolboxPanel";
@@ -73,9 +79,20 @@
             this.ToolboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.ToolboxPanel.Size = new System.Drawing.Size(284, 647);
             this.ToolboxPanel.TabIndex = 1;
-            this.ToolboxPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ToolboxPanel_Paint);
             // 
-            // MainForm
+            // ClearAllButton
+            // 
+            this.ClearAllButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ClearAllButton.Image = global::PolygonEditor.Properties.Resources.icon_clear_19;
+            this.ClearAllButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ClearAllButton.Location = new System.Drawing.Point(3, 3);
+            this.ClearAllButton.Name = "ClearAllButton";
+            this.ClearAllButton.Size = new System.Drawing.Size(136, 155);
+            this.ClearAllButton.TabIndex = 0;
+            this.ClearAllButton.UseVisualStyleBackColor = true;
+            this.ClearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
+            // 
+            // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -83,10 +100,11 @@
             this.Controls.Add(this.MainTable);
             this.MaximumSize = new System.Drawing.Size(1200, 700);
             this.MinimumSize = new System.Drawing.Size(1200, 700);
-            this.Name = "MainForm";
+            this.Name = "EditorForm";
             this.RightToLeftLayout = true;
             this.Text = "Polygon editor";
             this.MainTable.ResumeLayout(false);
+            this.ToolboxPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -96,6 +114,7 @@
         private System.Windows.Forms.TableLayoutPanel MainTable;
         private System.Windows.Forms.Panel Canvas;
         private System.Windows.Forms.TableLayoutPanel ToolboxPanel;
+        private System.Windows.Forms.Button ClearAllButton;
     }
 }
 
