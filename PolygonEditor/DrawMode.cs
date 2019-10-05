@@ -43,7 +43,10 @@ namespace PolygonEditor
             current_point = next_point;
 
             if (next_point == current_polygon.start_point)
+            {
+                current_polygon.apex.RemoveAt(current_polygon.apex.Count - 1);
                 ResetVariables();
+            }
         }
 
         private void CreateLine(MouseEventArgs e)
@@ -74,7 +77,7 @@ namespace PolygonEditor
 
         private bool CheckIfStartPoint(Point p1)
         {
-            if (Math.Abs(current_polygon.start_point.X - p1.X) <= 10 && Math.Abs(current_polygon.start_point.Y - p1.Y) <= 10)
+            if (Math.Abs(current_polygon.start_point.X - p1.X) <= 5 && Math.Abs(current_polygon.start_point.Y - p1.Y) <= 5)
                 return true;
 
             return false;
