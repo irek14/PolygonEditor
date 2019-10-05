@@ -28,7 +28,7 @@ namespace PolygonEditor
         Graphics graph;
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
-        {
+        {            
             if(current_mode == Mode.None)
             {
                 current_mode = Mode.FirstPoint;
@@ -51,7 +51,10 @@ namespace PolygonEditor
                 {
                     DeleteVertex(polygon, vertex);
                 }
+                polygons.RemoveAll(x => x.segments.Count == 0);
             }
+
+            PaintAllPoints(Brushes.Black);
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -74,6 +77,17 @@ namespace PolygonEditor
             {
                 CreateLine(e);
             }
+        }
+
+        private void PaintAllPoints(Brush brush )
+        {
+            foreach(var polygon in polygons)
+            {
+                foreach(var apex in polygon.apex)
+                {
+                    graph.FillRectangle(brush, apex.X-2, apex.Y-2, 4, 4);
+                }
+            }         
         }
 
         private bool GetNotCompletedPolygon()

@@ -62,6 +62,8 @@ namespace PolygonEditor
                     break;
                 }
             }
+
+            graph.FillRectangle(Brushes.White, vertex.X - 2, vertex.Y - 2, 4, 4);
         }
 
         private void DeleteSegment(Polygon polygon, (Point p1, Point p2) segment)
