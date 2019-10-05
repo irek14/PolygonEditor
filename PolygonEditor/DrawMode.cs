@@ -44,9 +44,48 @@ namespace PolygonEditor
 
             if (next_point == current_polygon.start_point)
             {
-                current_polygon.apex.RemoveAt(current_polygon.apex.Count - 1);
-                ResetVariables();
+                bool end = true;
+                for(int i =0; i<current_polygon.segments.Count; i++)
+                {
+                    if(current_polygon.segments[i].p2 != current_polygon.segments[(i+1)% current_polygon.segments.Count].p1)
+                    {
+                        end = false;
+                        CorrectSegmentAndApex(ref current_polygon, i);
+                        break;
+                    }
+                }
+                
+                if(end)
+                {
+                    current_polygon.apex.RemoveAt(current_polygon.apex.Count - 1);
+                    ResetVariables();
+                }
             }
+        }
+
+        private void CorrectSegmentAndApex(ref Polygon polygon,int index)
+        {
+            List<(Point, Point)> newSegments = new List<(Point, Point)>();
+            List<Point> newApex = new List<Point>();
+
+            for (int i = index + 1; i < polygon.segments.Count; i++)
+            {
+                newSegments.Add(polygon.segments[i]);
+                newApex.Add(polygon.segments[i].p1);
+            }
+
+            for (int i = 0; i <= index; i++)
+            {
+                newSegments.Add(polygon.segments[i]);
+                newApex.Add(polygon.segments[i].p1);
+            }
+
+            newApex.Add(polygon.segments[index].p2);
+
+            polygon.segments = newSegments;
+            polygon.apex = newApex;
+            polygon.start_point = polygon.apex.First();
+            current_point = polygon.apex.Last();
         }
 
         private void CreateLine(MouseEventArgs e)

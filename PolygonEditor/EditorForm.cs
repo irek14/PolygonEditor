@@ -13,7 +13,7 @@ namespace PolygonEditor
 {
     public partial class EditorForm : Form
     {
-        enum Mode { None, FirstPoint, Draw };
+        enum Mode { None, FirstPoint, Draw, DeleteVertex };
         public EditorForm()
         {
             InitializeComponent();
@@ -38,6 +38,14 @@ namespace PolygonEditor
                 Point next_point = new Point(e.Location.X, e.Location.Y);
                 CreateSegment(next_point);          
             }
+            else if(current_mode == Mode.DeleteVertex)
+            {
+                (Polygon polygon, Point vertex) = GetPolygonWithVertex(new Point(e.Location.X, e.Location.Y));
+                if (polygon != null)
+                {
+                    DeleteVertex(polygon, vertex);
+                }
+            }
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -46,15 +54,37 @@ namespace PolygonEditor
             {
                 current_mode = Mode.Draw;
                 Point point = new Point(e.Location.X, e.Location.Y);
-                current_polygon = new Polygon(point);
-                polygons.Add(current_polygon);
-                current_point = point;
+
+                bool createNew = GetNotCompletedPolygon();
+                if(createNew)
+                {
+                    current_polygon = new Polygon(point);
+                    polygons.Add(current_polygon);
+                    current_point = point;
+                }
             }
 
             if (current_mode == Mode.Draw && e.Button == MouseButtons.Left)
             {
                 CreateLine(e);
             }
+        }
+
+        private bool GetNotCompletedPolygon()
+        {
+            foreach(var polygon in polygons)
+            {
+                for(int i=0; i<polygon.segments.Count; i++)
+                {
+                    if (polygon.segments[i].p2 != polygon.segments[(i + 1) % polygon.segments.Count].p1)
+                    {
+                        current_polygon = polygon;
+                        CorrectSegmentAndApex(ref current_polygon, i);
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         private bool CheckSegmentIntersection(Point p1, Point p2, Point p3, Point p4)
@@ -91,6 +121,16 @@ namespace PolygonEditor
             current_point = null;
             previous_point = null;
             current_mode = Mode.None;
+        }
+
+        private void DeleteVertexButton_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.DeleteVertex;
+        }
+
+        private void DrawButton_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.FirstPoint;
         }
     }
 }

@@ -21,5 +21,10 @@ namespace PolygonEditor
 
             segments = new List<(Point p1, Point p2)>();
         }
+
+        public Polygon()
+        {
+
+        }
     }
 }

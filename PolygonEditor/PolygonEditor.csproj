@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeleteVertex.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DrawMode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="images\icon-clear-19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\DeleteDustbin-512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -63,6 +63,16 @@ namespace PolygonEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DeleteDustbin_512 {
+            get {
+                object obj = ResourceManager.GetObject("DeleteDustbin-512", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_clear_19 {
             get {
                 object obj = ResourceManager.GetObject("icon-clear-19", resourceCulture);

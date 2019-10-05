@@ -32,6 +32,8 @@
             this.Canvas = new System.Windows.Forms.Panel();
             this.ToolboxPanel = new System.Windows.Forms.TableLayoutPanel();
             this.ClearAllButton = new System.Windows.Forms.Button();
+            this.DeleteVertexButton = new System.Windows.Forms.Button();
+            this.DrawButton = new System.Windows.Forms.Button();
             this.MainTable.SuspendLayout();
             this.ToolboxPanel.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +71,8 @@
             this.ToolboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.ToolboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.ToolboxPanel.Controls.Add(this.ClearAllButton, 0, 0);
+            this.ToolboxPanel.Controls.Add(this.DeleteVertexButton, 1, 0);
+            this.ToolboxPanel.Controls.Add(this.DrawButton, 0, 1);
             this.ToolboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolboxPanel.Location = new System.Drawing.Point(3, 3);
             this.ToolboxPanel.Name = "ToolboxPanel";
@@ -91,6 +95,27 @@
             this.ClearAllButton.TabIndex = 0;
             this.ClearAllButton.UseVisualStyleBackColor = true;
             this.ClearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
+            // 
+            // DeleteVertexButton
+            // 
+            this.DeleteVertexButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DeleteVertexButton.Image = global::PolygonEditor.Properties.Resources.DeleteDustbin_512;
+            this.DeleteVertexButton.Location = new System.Drawing.Point(145, 3);
+            this.DeleteVertexButton.Name = "DeleteVertexButton";
+            this.DeleteVertexButton.Size = new System.Drawing.Size(136, 155);
+            this.DeleteVertexButton.TabIndex = 1;
+            this.DeleteVertexButton.UseVisualStyleBackColor = true;
+            this.DeleteVertexButton.Click += new System.EventHandler(this.DeleteVertexButton_Click);
+            // 
+            // DrawButton
+            // 
+            this.DrawButton.Location = new System.Drawing.Point(3, 164);
+            this.DrawButton.Name = "DrawButton";
+            this.DrawButton.Size = new System.Drawing.Size(75, 23);
+            this.DrawButton.TabIndex = 2;
+            this.DrawButton.Text = "Draw";
+            this.DrawButton.UseVisualStyleBackColor = true;
+            this.DrawButton.Click += new System.EventHandler(this.DrawButton_Click);
             // 
             // EditorForm
             // 
@@ -115,6 +140,8 @@
         private System.Windows.Forms.Panel Canvas;
         private System.Windows.Forms.TableLayoutPanel ToolboxPanel;
         private System.Windows.Forms.Button ClearAllButton;
+        private System.Windows.Forms.Button DeleteVertexButton;
+        private System.Windows.Forms.Button DrawButton;
     }
 }
 
