@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace PolygonEditor
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void ToolboxPanel_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics graph = Canvas.CreateGraphics();
+            graph.DrawEllipse(Pens.Red, 0, 0, 25, 25);
         }
     }
 }
