@@ -35,6 +35,12 @@ namespace PolygonEditor
             }
             else if(current_mode == Mode.Draw)
             {
+                if (previous_point != null)
+                {
+                    BrenshamDrawLine(new Pen(Color.White), (Point)current_point, (Point)previous_point);
+
+                    PaintInstersectSegments((Point)current_point, (Point)previous_point);
+                }
                 Point next_point = new Point(e.Location.X, e.Location.Y);
                 CreateSegment(next_point);          
             }
