@@ -13,7 +13,7 @@ namespace PolygonEditor
 {
     public partial class EditorForm : Form
     {
-        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon, MoveStart, Move };
+        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon, MovePolygonStart, MovePolygon, MoveVertexStart, MoveVertex };
         public EditorForm()
         {
             InitializeComponent();
@@ -59,9 +59,13 @@ namespace PolygonEditor
                 if (toDelete != null)
                     DeletePolygon(toDelete);
             }
-            else if(current_mode == Mode.Move)
+            else if(current_mode == Mode.MovePolygon)
             {
-                current_mode = Mode.MoveStart;
+                current_mode = Mode.MovePolygonStart;
+            }
+            else if(current_mode == Mode.MoveVertex)
+            {
+                current_mode = Mode.MoveVertexStart;
             }
 
             foreach(var polygon in polygons)
@@ -70,7 +74,7 @@ namespace PolygonEditor
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            if (current_mode == Mode.MoveStart)
+            if (current_mode == Mode.MovePolygonStart)
             {
                 Point p = new Point(e.Location.X, e.Location.Y);
                 Polygon toMove = GetPolygonWithPointOnSegment(p);
@@ -78,8 +82,20 @@ namespace PolygonEditor
                 {
                     start_move_point = p;
                     current_polygon = toMove;
-                    current_mode = Mode.Move;
+                    current_mode = Mode.MovePolygon;
                     Cursor.Current = Cursors.NoMove2D;
+                }
+            }
+            else if(current_mode == Mode.MoveVertexStart)
+            {
+                Point p = new Point(e.Location.X, e.Location.Y);
+                (Polygon polygon, Point vertex) = GetPolygonWithVertex(p);
+                if (polygon != null)
+                {
+                    current_polygon = polygon;
+                    vertex_to_move = vertex;
+                    current_mode = Mode.MoveVertex;
+                    Cursor.Current = Cursors.Hand;
                 }
             }
         }
@@ -105,9 +121,14 @@ namespace PolygonEditor
                 CreateLine(e);
             }
 
-            if(current_mode == Mode.Move)
+            if(current_mode == Mode.MovePolygon)
             {
                 MovePolygon(new Point(e.Location.X, e.Location.Y));
+            }
+
+            if(current_mode == Mode.MoveVertex)
+            {
+                MoveVertex(new Point(e.Location.X, e.Location.Y));
             }
 
             foreach (var polygon in polygons)
@@ -192,7 +213,12 @@ namespace PolygonEditor
 
         private void MoveButton_Click(object sender, EventArgs e)
         {
-            current_mode = Mode.MoveStart;
+            current_mode = Mode.MovePolygonStart;
+        }
+
+        private void VertexMoveButton_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.MoveVertexStart;
         }
     }
 }

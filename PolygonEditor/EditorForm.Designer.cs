@@ -36,6 +36,7 @@
             this.DrawButton = new System.Windows.Forms.Button();
             this.DeletePolygonButton = new System.Windows.Forms.Button();
             this.MoveButton = new System.Windows.Forms.Button();
+            this.VertexMoveButton = new System.Windows.Forms.Button();
             this.MainTable.SuspendLayout();
             this.ToolboxPanel.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +79,7 @@
             this.ToolboxPanel.Controls.Add(this.DrawButton, 0, 1);
             this.ToolboxPanel.Controls.Add(this.DeletePolygonButton, 1, 1);
             this.ToolboxPanel.Controls.Add(this.MoveButton, 0, 2);
+            this.ToolboxPanel.Controls.Add(this.VertexMoveButton, 1, 2);
             this.ToolboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolboxPanel.Location = new System.Drawing.Point(3, 3);
             this.ToolboxPanel.Name = "ToolboxPanel";
@@ -142,6 +144,16 @@
             this.MoveButton.UseVisualStyleBackColor = true;
             this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
             // 
+            // VertexMoveButton
+            // 
+            this.VertexMoveButton.Location = new System.Drawing.Point(145, 325);
+            this.VertexMoveButton.Name = "VertexMoveButton";
+            this.VertexMoveButton.Size = new System.Drawing.Size(75, 23);
+            this.VertexMoveButton.TabIndex = 5;
+            this.VertexMoveButton.Text = "VertexMove";
+            this.VertexMoveButton.UseVisualStyleBackColor = true;
+            this.VertexMoveButton.Click += new System.EventHandler(this.VertexMoveButton_Click);
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -169,6 +181,7 @@
         private System.Windows.Forms.Button DrawButton;
         private System.Windows.Forms.Button DeletePolygonButton;
         private System.Windows.Forms.Button MoveButton;
+        private System.Windows.Forms.Button VertexMoveButton;
     }
 }
 
