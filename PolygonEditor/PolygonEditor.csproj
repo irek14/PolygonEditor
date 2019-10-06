@@ -67,6 +67,9 @@
     <Compile Include="MovePolygon.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MoveSegment.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MoveVertex.cs">
       <SubType>Form</SubType>
     </Compile>

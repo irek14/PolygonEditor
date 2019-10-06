@@ -13,7 +13,7 @@ namespace PolygonEditor
 {
     public partial class EditorForm : Form
     {
-        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon, MovePolygonStart, MovePolygon, MoveVertexStart, MoveVertex, AddVertex };
+        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon, MovePolygonStart, MovePolygon, MoveVertexStart, MoveVertex, MoveSegmentStart, MoveSegment, AddVertex};
         public EditorForm()
         {
             InitializeComponent();
@@ -67,6 +67,10 @@ namespace PolygonEditor
             {
                 current_mode = Mode.MoveVertexStart;
             }
+            else if(current_mode == Mode.MoveSegment)
+            {
+                current_mode = Mode.MoveSegmentStart;
+            }
             else if(current_mode == Mode.AddVertex)
             {
                 Point newPoint = new Point(e.Location.X, e.Location.Y);
@@ -99,10 +103,24 @@ namespace PolygonEditor
                 (Polygon polygon, Point vertex) = GetPolygonWithVertex(p);
                 if (polygon != null)
                 {
+                    start_move_point = p;
                     current_polygon = polygon;
                     vertex_to_move = vertex;
                     current_mode = Mode.MoveVertex;
                     Cursor.Current = Cursors.Hand;
+                }
+            }
+            else if(current_mode == Mode.MoveSegmentStart)
+            {
+                Point p = new Point(e.Location.X, e.Location.Y);
+                (Polygon toMove, (Point, Point) segment) = GetPolygonWithPointOnSegment(p);
+                if (toMove != null)
+                {
+                    start_move_point = p;
+                    segmentToMove = segment;
+                    current_polygon = toMove;
+                    current_mode = Mode.MoveSegment;
+                    Cursor.Current = Cursors.NoMove2D;
                 }
             }
         }
@@ -136,6 +154,11 @@ namespace PolygonEditor
             if(current_mode == Mode.MoveVertex)
             {
                 MoveVertex(new Point(e.Location.X, e.Location.Y));
+            }
+
+            if(current_mode == Mode.MoveSegment)
+            {
+                MoveSegment(new Point(e.Location.X, e.Location.Y));
             }
 
             foreach (var polygon in polygons)
@@ -231,6 +254,11 @@ namespace PolygonEditor
         private void AddVertexButton_Click(object sender, EventArgs e)
         {
             current_mode = Mode.AddVertex;
+        }
+
+        private void SegmentMoveButton_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.MoveSegmentStart;
         }
     }
 }

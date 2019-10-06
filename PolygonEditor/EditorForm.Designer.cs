@@ -38,6 +38,7 @@
             this.MoveButton = new System.Windows.Forms.Button();
             this.VertexMoveButton = new System.Windows.Forms.Button();
             this.AddVertexButton = new System.Windows.Forms.Button();
+            this.SegmentMoveButton = new System.Windows.Forms.Button();
             this.MainTable.SuspendLayout();
             this.ToolboxPanel.SuspendLayout();
             this.SuspendLayout();
@@ -82,6 +83,7 @@
             this.ToolboxPanel.Controls.Add(this.MoveButton, 0, 2);
             this.ToolboxPanel.Controls.Add(this.VertexMoveButton, 1, 2);
             this.ToolboxPanel.Controls.Add(this.AddVertexButton, 0, 3);
+            this.ToolboxPanel.Controls.Add(this.SegmentMoveButton, 1, 3);
             this.ToolboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolboxPanel.Location = new System.Drawing.Point(3, 3);
             this.ToolboxPanel.Name = "ToolboxPanel";
@@ -166,6 +168,16 @@
             this.AddVertexButton.UseVisualStyleBackColor = true;
             this.AddVertexButton.Click += new System.EventHandler(this.AddVertexButton_Click);
             // 
+            // SegmentMoveButton
+            // 
+            this.SegmentMoveButton.Location = new System.Drawing.Point(145, 486);
+            this.SegmentMoveButton.Name = "SegmentMoveButton";
+            this.SegmentMoveButton.Size = new System.Drawing.Size(75, 23);
+            this.SegmentMoveButton.TabIndex = 7;
+            this.SegmentMoveButton.Text = "SegmentMove";
+            this.SegmentMoveButton.UseVisualStyleBackColor = true;
+            this.SegmentMoveButton.Click += new System.EventHandler(this.SegmentMoveButton_Click);
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -195,6 +207,7 @@
         private System.Windows.Forms.Button MoveButton;
         private System.Windows.Forms.Button VertexMoveButton;
         private System.Windows.Forms.Button AddVertexButton;
+        private System.Windows.Forms.Button SegmentMoveButton;
     }
 }
 
