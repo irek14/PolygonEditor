@@ -24,7 +24,7 @@ namespace PolygonEditor
         Point? previous_point = null;
         List<Polygon> polygons = new List<Polygon>();
         Polygon current_polygon;
-        Mode current_mode = Mode.None;
+        Mode current_mode = Mode.FirstPoint;
         Graphics graph;
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
@@ -223,42 +223,73 @@ namespace PolygonEditor
         {
             current_point = null;
             previous_point = null;
-            current_mode = Mode.None;
-        }
-
-        private void DeleteVertexButton_Click(object sender, EventArgs e)
-        {
-            current_mode = Mode.DeleteVertex;
-        }
-
-        private void DrawButton_Click(object sender, EventArgs e)
-        {
             current_mode = Mode.FirstPoint;
         }
 
-        private void DeletePolygonButton_Click(object sender, EventArgs e)
-        {
-            current_mode = Mode.DeletePolygon;
-        }
-
-        private void MoveButton_Click(object sender, EventArgs e)
-        {
-            current_mode = Mode.MovePolygonStart;
-        }
-
-        private void VertexMoveButton_Click(object sender, EventArgs e)
+        private void vertexMoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             current_mode = Mode.MoveVertexStart;
+            UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
         }
 
-        private void AddVertexButton_Click(object sender, EventArgs e)
+        private void polygonMoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            current_mode = Mode.AddVertex;
+            current_mode = Mode.MovePolygonStart;
+            UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
         }
 
-        private void SegmentMoveButton_Click(object sender, EventArgs e)
+        private void segmentMoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             current_mode = Mode.MoveSegmentStart;
+            UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
+        }
+
+        private void polygonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.DeletePolygon;
+            UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
+        }
+
+        private void vertexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.DeleteVertex;
+            UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
+        }
+
+        private void drawToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.FirstPoint;
+            UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
+        }
+
+        private void clearAllToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            polygons.Clear();
+            ResetVariables();
+            Canvas.Invalidate();
+        }
+
+        private void addVertexToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.AddVertex;
+            UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
+        }
+
+        public void UncheckOtherToolStripMenuItems(ToolStripMenuItem selectedMenuItem)
+        {
+
+            foreach(ToolStripMenuItem menu_item in Menu.Items)
+            {
+                foreach(ToolStripMenuItem item in menu_item.DropDown.Items)
+                {
+                    item.Checked = false;
+                   
+                }
+                
+             
+            }
+
+            selectedMenuItem.Checked = true;
         }
     }
 }

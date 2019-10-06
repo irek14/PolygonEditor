@@ -28,186 +28,243 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorForm));
+            this.Menu = new System.Windows.Forms.MenuStrip();
+            this.drawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drawToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAllToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.vertexMoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.polygonMoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.segmentMoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.polygonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addVertexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addVertexToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addRelationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sameLengthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.perpendicularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTable = new System.Windows.Forms.TableLayoutPanel();
             this.Canvas = new System.Windows.Forms.Panel();
-            this.ToolboxPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.ClearAllButton = new System.Windows.Forms.Button();
-            this.DeleteVertexButton = new System.Windows.Forms.Button();
-            this.DrawButton = new System.Windows.Forms.Button();
-            this.DeletePolygonButton = new System.Windows.Forms.Button();
-            this.MoveButton = new System.Windows.Forms.Button();
-            this.VertexMoveButton = new System.Windows.Forms.Button();
-            this.AddVertexButton = new System.Windows.Forms.Button();
-            this.SegmentMoveButton = new System.Windows.Forms.Button();
+            this.Menu.SuspendLayout();
             this.MainTable.SuspendLayout();
-            this.ToolboxPanel.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // Menu
+            // 
+            this.Menu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.drawToolStripMenuItem,
+            this.moveToolStripMenuItem2,
+            this.deleteToolStripMenuItem,
+            this.addVertexToolStripMenuItem,
+            this.addRelationToolStripMenuItem});
+            this.Menu.Location = new System.Drawing.Point(0, 0);
+            this.Menu.Name = "Menu";
+            this.Menu.Size = new System.Drawing.Size(1582, 28);
+            this.Menu.TabIndex = 1;
+            this.Menu.Text = "menuStrip1";
+            // 
+            // drawToolStripMenuItem
+            // 
+            this.drawToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.drawToolStripMenuItem1,
+            this.clearAllToolStripMenuItem1});
+            this.drawToolStripMenuItem.Name = "drawToolStripMenuItem";
+            this.drawToolStripMenuItem.Size = new System.Drawing.Size(54, 24);
+            this.drawToolStripMenuItem.Text = "Main";
+            // 
+            // drawToolStripMenuItem1
+            // 
+            this.drawToolStripMenuItem1.Checked = true;
+            this.drawToolStripMenuItem1.CheckOnClick = true;
+            this.drawToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.drawToolStripMenuItem1.Name = "drawToolStripMenuItem1";
+            this.drawToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
+            this.drawToolStripMenuItem1.Text = "Draw";
+            this.drawToolStripMenuItem1.Click += new System.EventHandler(this.drawToolStripMenuItem1_Click);
+            // 
+            // clearAllToolStripMenuItem1
+            // 
+            this.clearAllToolStripMenuItem1.Name = "clearAllToolStripMenuItem1";
+            this.clearAllToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
+            this.clearAllToolStripMenuItem1.Text = "Clear all";
+            this.clearAllToolStripMenuItem1.Click += new System.EventHandler(this.clearAllToolStripMenuItem1_Click);
+            // 
+            // moveToolStripMenuItem2
+            // 
+            this.moveToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.vertexMoveToolStripMenuItem,
+            this.polygonMoveToolStripMenuItem,
+            this.segmentMoveToolStripMenuItem});
+            this.moveToolStripMenuItem2.Name = "moveToolStripMenuItem2";
+            this.moveToolStripMenuItem2.Size = new System.Drawing.Size(58, 24);
+            this.moveToolStripMenuItem2.Text = "Move";
+            // 
+            // vertexMoveToolStripMenuItem
+            // 
+            this.vertexMoveToolStripMenuItem.CheckOnClick = true;
+            this.vertexMoveToolStripMenuItem.Name = "vertexMoveToolStripMenuItem";
+            this.vertexMoveToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.vertexMoveToolStripMenuItem.Text = "Vertex move";
+            this.vertexMoveToolStripMenuItem.Click += new System.EventHandler(this.vertexMoveToolStripMenuItem_Click);
+            // 
+            // polygonMoveToolStripMenuItem
+            // 
+            this.polygonMoveToolStripMenuItem.CheckOnClick = true;
+            this.polygonMoveToolStripMenuItem.Name = "polygonMoveToolStripMenuItem";
+            this.polygonMoveToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.polygonMoveToolStripMenuItem.Text = "Polygon move";
+            this.polygonMoveToolStripMenuItem.Click += new System.EventHandler(this.polygonMoveToolStripMenuItem_Click);
+            // 
+            // segmentMoveToolStripMenuItem
+            // 
+            this.segmentMoveToolStripMenuItem.CheckOnClick = true;
+            this.segmentMoveToolStripMenuItem.Name = "segmentMoveToolStripMenuItem";
+            this.segmentMoveToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.segmentMoveToolStripMenuItem.Text = "Segment move";
+            this.segmentMoveToolStripMenuItem.Click += new System.EventHandler(this.segmentMoveToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.CheckOnClick = true;
+            this.deleteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.polygonToolStripMenuItem,
+            this.vertexToolStripMenuItem});
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
+            // polygonToolStripMenuItem
+            // 
+            this.polygonToolStripMenuItem.CheckOnClick = true;
+            this.polygonToolStripMenuItem.Name = "polygonToolStripMenuItem";
+            this.polygonToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.polygonToolStripMenuItem.Text = "Polygon";
+            this.polygonToolStripMenuItem.Click += new System.EventHandler(this.polygonToolStripMenuItem_Click);
+            // 
+            // vertexToolStripMenuItem
+            // 
+            this.vertexToolStripMenuItem.CheckOnClick = true;
+            this.vertexToolStripMenuItem.Name = "vertexToolStripMenuItem";
+            this.vertexToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.vertexToolStripMenuItem.Text = "Vertex";
+            this.vertexToolStripMenuItem.Click += new System.EventHandler(this.vertexToolStripMenuItem_Click);
+            // 
+            // addVertexToolStripMenuItem
+            // 
+            this.addVertexToolStripMenuItem.Checked = true;
+            this.addVertexToolStripMenuItem.CheckOnClick = true;
+            this.addVertexToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.addVertexToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addVertexToolStripMenuItem1});
+            this.addVertexToolStripMenuItem.Name = "addVertexToolStripMenuItem";
+            this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.addVertexToolStripMenuItem.Text = "Add";
+            // 
+            // addVertexToolStripMenuItem1
+            // 
+            this.addVertexToolStripMenuItem1.CheckOnClick = true;
+            this.addVertexToolStripMenuItem1.Name = "addVertexToolStripMenuItem1";
+            this.addVertexToolStripMenuItem1.Size = new System.Drawing.Size(156, 26);
+            this.addVertexToolStripMenuItem1.Text = "Add vertex";
+            this.addVertexToolStripMenuItem1.Click += new System.EventHandler(this.addVertexToolStripMenuItem1_Click);
+            // 
+            // addRelationToolStripMenuItem
+            // 
+            this.addRelationToolStripMenuItem.CheckOnClick = true;
+            this.addRelationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sameLengthToolStripMenuItem,
+            this.perpendicularToolStripMenuItem});
+            this.addRelationToolStripMenuItem.Name = "addRelationToolStripMenuItem";
+            this.addRelationToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
+            this.addRelationToolStripMenuItem.Text = "Add relation";
+            // 
+            // sameLengthToolStripMenuItem
+            // 
+            this.sameLengthToolStripMenuItem.CheckOnClick = true;
+            this.sameLengthToolStripMenuItem.Name = "sameLengthToolStripMenuItem";
+            this.sameLengthToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
+            this.sameLengthToolStripMenuItem.Text = "Same length";
+            // 
+            // perpendicularToolStripMenuItem
+            // 
+            this.perpendicularToolStripMenuItem.CheckOnClick = true;
+            this.perpendicularToolStripMenuItem.Name = "perpendicularToolStripMenuItem";
+            this.perpendicularToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
+            this.perpendicularToolStripMenuItem.Text = "Perpendicular";
             // 
             // MainTable
             // 
-            this.MainTable.ColumnCount = 2;
-            this.MainTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.53469F));
-            this.MainTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.46532F));
-            this.MainTable.Controls.Add(this.Canvas, 1, 0);
-            this.MainTable.Controls.Add(this.ToolboxPanel, 0, 0);
+            this.MainTable.ColumnCount = 1;
+            this.MainTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.MainTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.MainTable.Controls.Add(this.Canvas, 0, 0);
             this.MainTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainTable.Location = new System.Drawing.Point(0, 0);
+            this.MainTable.Location = new System.Drawing.Point(0, 28);
             this.MainTable.Name = "MainTable";
             this.MainTable.RowCount = 1;
-            this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.MainTable.Size = new System.Drawing.Size(1182, 653);
+            this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.MainTable.Size = new System.Drawing.Size(1582, 825);
             this.MainTable.TabIndex = 0;
             // 
             // Canvas
             // 
             this.Canvas.BackColor = System.Drawing.Color.White;
             this.Canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Canvas.Location = new System.Drawing.Point(293, 3);
+            this.Canvas.Location = new System.Drawing.Point(3, 3);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(886, 647);
+            this.Canvas.Size = new System.Drawing.Size(1576, 819);
             this.Canvas.TabIndex = 0;
             this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
             this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
             this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
             this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
-            // ToolboxPanel
-            // 
-            this.ToolboxPanel.ColumnCount = 2;
-            this.ToolboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.ToolboxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.ToolboxPanel.Controls.Add(this.ClearAllButton, 0, 0);
-            this.ToolboxPanel.Controls.Add(this.DeleteVertexButton, 1, 0);
-            this.ToolboxPanel.Controls.Add(this.DrawButton, 0, 1);
-            this.ToolboxPanel.Controls.Add(this.DeletePolygonButton, 1, 1);
-            this.ToolboxPanel.Controls.Add(this.MoveButton, 0, 2);
-            this.ToolboxPanel.Controls.Add(this.VertexMoveButton, 1, 2);
-            this.ToolboxPanel.Controls.Add(this.AddVertexButton, 0, 3);
-            this.ToolboxPanel.Controls.Add(this.SegmentMoveButton, 1, 3);
-            this.ToolboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ToolboxPanel.Location = new System.Drawing.Point(3, 3);
-            this.ToolboxPanel.Name = "ToolboxPanel";
-            this.ToolboxPanel.RowCount = 4;
-            this.ToolboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.ToolboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.ToolboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.ToolboxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.ToolboxPanel.Size = new System.Drawing.Size(284, 647);
-            this.ToolboxPanel.TabIndex = 1;
-            // 
-            // ClearAllButton
-            // 
-            this.ClearAllButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ClearAllButton.Image = global::PolygonEditor.Properties.Resources.icon_clear_19;
-            this.ClearAllButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.ClearAllButton.Location = new System.Drawing.Point(3, 3);
-            this.ClearAllButton.Name = "ClearAllButton";
-            this.ClearAllButton.Size = new System.Drawing.Size(136, 155);
-            this.ClearAllButton.TabIndex = 0;
-            this.ClearAllButton.UseVisualStyleBackColor = true;
-            this.ClearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
-            // 
-            // DeleteVertexButton
-            // 
-            this.DeleteVertexButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DeleteVertexButton.Image = global::PolygonEditor.Properties.Resources.DeleteDustbin_512;
-            this.DeleteVertexButton.Location = new System.Drawing.Point(145, 3);
-            this.DeleteVertexButton.Name = "DeleteVertexButton";
-            this.DeleteVertexButton.Size = new System.Drawing.Size(136, 155);
-            this.DeleteVertexButton.TabIndex = 1;
-            this.DeleteVertexButton.UseVisualStyleBackColor = true;
-            this.DeleteVertexButton.Click += new System.EventHandler(this.DeleteVertexButton_Click);
-            // 
-            // DrawButton
-            // 
-            this.DrawButton.Location = new System.Drawing.Point(3, 164);
-            this.DrawButton.Name = "DrawButton";
-            this.DrawButton.Size = new System.Drawing.Size(75, 23);
-            this.DrawButton.TabIndex = 2;
-            this.DrawButton.Text = "Draw";
-            this.DrawButton.UseVisualStyleBackColor = true;
-            this.DrawButton.Click += new System.EventHandler(this.DrawButton_Click);
-            // 
-            // DeletePolygonButton
-            // 
-            this.DeletePolygonButton.Location = new System.Drawing.Point(145, 164);
-            this.DeletePolygonButton.Name = "DeletePolygonButton";
-            this.DeletePolygonButton.Size = new System.Drawing.Size(75, 23);
-            this.DeletePolygonButton.TabIndex = 3;
-            this.DeletePolygonButton.Text = "Delete polygon";
-            this.DeletePolygonButton.UseVisualStyleBackColor = true;
-            this.DeletePolygonButton.Click += new System.EventHandler(this.DeletePolygonButton_Click);
-            // 
-            // MoveButton
-            // 
-            this.MoveButton.Location = new System.Drawing.Point(3, 325);
-            this.MoveButton.Name = "MoveButton";
-            this.MoveButton.Size = new System.Drawing.Size(75, 23);
-            this.MoveButton.TabIndex = 4;
-            this.MoveButton.Text = "Move";
-            this.MoveButton.UseVisualStyleBackColor = true;
-            this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
-            // 
-            // VertexMoveButton
-            // 
-            this.VertexMoveButton.Location = new System.Drawing.Point(145, 325);
-            this.VertexMoveButton.Name = "VertexMoveButton";
-            this.VertexMoveButton.Size = new System.Drawing.Size(75, 23);
-            this.VertexMoveButton.TabIndex = 5;
-            this.VertexMoveButton.Text = "VertexMove";
-            this.VertexMoveButton.UseVisualStyleBackColor = true;
-            this.VertexMoveButton.Click += new System.EventHandler(this.VertexMoveButton_Click);
-            // 
-            // AddVertexButton
-            // 
-            this.AddVertexButton.Location = new System.Drawing.Point(3, 486);
-            this.AddVertexButton.Name = "AddVertexButton";
-            this.AddVertexButton.Size = new System.Drawing.Size(75, 23);
-            this.AddVertexButton.TabIndex = 6;
-            this.AddVertexButton.Text = "Add Vertex";
-            this.AddVertexButton.UseVisualStyleBackColor = true;
-            this.AddVertexButton.Click += new System.EventHandler(this.AddVertexButton_Click);
-            // 
-            // SegmentMoveButton
-            // 
-            this.SegmentMoveButton.Location = new System.Drawing.Point(145, 486);
-            this.SegmentMoveButton.Name = "SegmentMoveButton";
-            this.SegmentMoveButton.Size = new System.Drawing.Size(75, 23);
-            this.SegmentMoveButton.TabIndex = 7;
-            this.SegmentMoveButton.Text = "SegmentMove";
-            this.SegmentMoveButton.UseVisualStyleBackColor = true;
-            this.SegmentMoveButton.Click += new System.EventHandler(this.SegmentMoveButton_Click);
-            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 653);
+            this.BackColor = System.Drawing.SystemColors.GrayText;
+            this.ClientSize = new System.Drawing.Size(1582, 853);
             this.Controls.Add(this.MainTable);
-            this.MaximumSize = new System.Drawing.Size(1200, 700);
-            this.MinimumSize = new System.Drawing.Size(1200, 700);
+            this.Controls.Add(this.Menu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1600, 900);
+            this.MinimumSize = new System.Drawing.Size(1600, 900);
             this.Name = "EditorForm";
             this.RightToLeftLayout = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Polygon editor";
+            this.Menu.ResumeLayout(false);
+            this.Menu.PerformLayout();
             this.MainTable.ResumeLayout(false);
-            this.ToolboxPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
+        private System.Windows.Forms.MenuStrip Menu;
+        private System.Windows.Forms.ToolStripMenuItem moveToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem vertexMoveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem polygonMoveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem segmentMoveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem drawToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem polygonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vertexToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addRelationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sameLengthToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem perpendicularToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel MainTable;
         private System.Windows.Forms.Panel Canvas;
-        private System.Windows.Forms.TableLayoutPanel ToolboxPanel;
-        private System.Windows.Forms.Button ClearAllButton;
-        private System.Windows.Forms.Button DeleteVertexButton;
-        private System.Windows.Forms.Button DrawButton;
-        private System.Windows.Forms.Button DeletePolygonButton;
-        private System.Windows.Forms.Button MoveButton;
-        private System.Windows.Forms.Button VertexMoveButton;
-        private System.Windows.Forms.Button AddVertexButton;
-        private System.Windows.Forms.Button SegmentMoveButton;
+        private System.Windows.Forms.ToolStripMenuItem addVertexToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem drawToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem clearAllToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem addVertexToolStripMenuItem1;
     }
 }
 
