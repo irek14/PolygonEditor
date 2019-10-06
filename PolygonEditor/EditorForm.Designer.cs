@@ -35,6 +35,7 @@
             this.DeleteVertexButton = new System.Windows.Forms.Button();
             this.DrawButton = new System.Windows.Forms.Button();
             this.DeletePolygonButton = new System.Windows.Forms.Button();
+            this.MoveButton = new System.Windows.Forms.Button();
             this.MainTable.SuspendLayout();
             this.ToolboxPanel.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +64,7 @@
             this.Canvas.Size = new System.Drawing.Size(886, 647);
             this.Canvas.TabIndex = 0;
             this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
+            this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
             this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
             this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
@@ -75,6 +77,7 @@
             this.ToolboxPanel.Controls.Add(this.DeleteVertexButton, 1, 0);
             this.ToolboxPanel.Controls.Add(this.DrawButton, 0, 1);
             this.ToolboxPanel.Controls.Add(this.DeletePolygonButton, 1, 1);
+            this.ToolboxPanel.Controls.Add(this.MoveButton, 0, 2);
             this.ToolboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolboxPanel.Location = new System.Drawing.Point(3, 3);
             this.ToolboxPanel.Name = "ToolboxPanel";
@@ -129,6 +132,16 @@
             this.DeletePolygonButton.UseVisualStyleBackColor = true;
             this.DeletePolygonButton.Click += new System.EventHandler(this.DeletePolygonButton_Click);
             // 
+            // MoveButton
+            // 
+            this.MoveButton.Location = new System.Drawing.Point(3, 325);
+            this.MoveButton.Name = "MoveButton";
+            this.MoveButton.Size = new System.Drawing.Size(75, 23);
+            this.MoveButton.TabIndex = 4;
+            this.MoveButton.Text = "Move";
+            this.MoveButton.UseVisualStyleBackColor = true;
+            this.MoveButton.Click += new System.EventHandler(this.MoveButton_Click);
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -155,6 +168,7 @@
         private System.Windows.Forms.Button DeleteVertexButton;
         private System.Windows.Forms.Button DrawButton;
         private System.Windows.Forms.Button DeletePolygonButton;
+        private System.Windows.Forms.Button MoveButton;
     }
 }
 

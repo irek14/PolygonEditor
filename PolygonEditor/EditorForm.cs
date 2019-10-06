@@ -59,9 +59,29 @@ namespace PolygonEditor
                 if (toDelete != null)
                     DeletePolygon(toDelete);
             }
+            else if(current_mode == Mode.Move)
+            {
+                current_mode = Mode.MoveStart;
+            }
 
             foreach(var polygon in polygons)
                 PaintAllPoints(Brushes.Black, polygon);
+        }
+
+        private void Canvas_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (current_mode == Mode.MoveStart)
+            {
+                Point p = new Point(e.Location.X, e.Location.Y);
+                Polygon toMove = GetPolygonWithPointOnSegment(p);
+                if(toMove != null)
+                {
+                    start_move_point = p;
+                    current_polygon = toMove;
+                    current_mode = Mode.Move;
+                    Cursor.Current = Cursors.NoMove2D;
+                }
+            }
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -84,6 +104,14 @@ namespace PolygonEditor
             {
                 CreateLine(e);
             }
+
+            if(current_mode == Mode.Move)
+            {
+                MovePolygon(new Point(e.Location.X, e.Location.Y));
+            }
+
+            foreach (var polygon in polygons)
+                PaintAllPoints(Brushes.Black, polygon);
         }
 
         private void PaintAllPoints(Brush brush, Polygon polygon)
@@ -160,6 +188,11 @@ namespace PolygonEditor
         private void DeletePolygonButton_Click(object sender, EventArgs e)
         {
             current_mode = Mode.DeletePolygon;
+        }
+
+        private void MoveButton_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.MoveStart;
         }
     }
 }
