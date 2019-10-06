@@ -37,6 +37,7 @@
             this.DeletePolygonButton = new System.Windows.Forms.Button();
             this.MoveButton = new System.Windows.Forms.Button();
             this.VertexMoveButton = new System.Windows.Forms.Button();
+            this.AddVertexButton = new System.Windows.Forms.Button();
             this.MainTable.SuspendLayout();
             this.ToolboxPanel.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +81,7 @@
             this.ToolboxPanel.Controls.Add(this.DeletePolygonButton, 1, 1);
             this.ToolboxPanel.Controls.Add(this.MoveButton, 0, 2);
             this.ToolboxPanel.Controls.Add(this.VertexMoveButton, 1, 2);
+            this.ToolboxPanel.Controls.Add(this.AddVertexButton, 0, 3);
             this.ToolboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolboxPanel.Location = new System.Drawing.Point(3, 3);
             this.ToolboxPanel.Name = "ToolboxPanel";
@@ -154,6 +156,16 @@
             this.VertexMoveButton.UseVisualStyleBackColor = true;
             this.VertexMoveButton.Click += new System.EventHandler(this.VertexMoveButton_Click);
             // 
+            // AddVertexButton
+            // 
+            this.AddVertexButton.Location = new System.Drawing.Point(3, 486);
+            this.AddVertexButton.Name = "AddVertexButton";
+            this.AddVertexButton.Size = new System.Drawing.Size(75, 23);
+            this.AddVertexButton.TabIndex = 6;
+            this.AddVertexButton.Text = "Add Vertex";
+            this.AddVertexButton.UseVisualStyleBackColor = true;
+            this.AddVertexButton.Click += new System.EventHandler(this.AddVertexButton_Click);
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -182,6 +194,7 @@
         private System.Windows.Forms.Button DeletePolygonButton;
         private System.Windows.Forms.Button MoveButton;
         private System.Windows.Forms.Button VertexMoveButton;
+        private System.Windows.Forms.Button AddVertexButton;
     }
 }
 

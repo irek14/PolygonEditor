@@ -13,17 +13,17 @@ namespace PolygonEditor
 {
     public partial class EditorForm : Form
     {
-        private Polygon GetPolygonWithPointOnSegment(Point p)
+        private (Polygon, (Point,Point)) GetPolygonWithPointOnSegment(Point p)
         {
             foreach(var polygon in polygons)
             {
                 foreach(var segment in polygon.segments)
                 {
                     if (GetDistanceFromLine(segment, p) <= 3)
-                        return polygon;
+                        return (polygon,segment);
                 }
             }
-            return null;
+            return (null, (new Point(), new Point()));
         }
 
         private void DeletePolygon(Polygon polygon)

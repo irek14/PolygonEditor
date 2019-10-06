@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddVertex.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DeletePolygon.cs">
       <SubType>Form</SubType>
     </Compile>

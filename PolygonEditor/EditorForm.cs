@@ -13,7 +13,7 @@ namespace PolygonEditor
 {
     public partial class EditorForm : Form
     {
-        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon, MovePolygonStart, MovePolygon, MoveVertexStart, MoveVertex };
+        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon, MovePolygonStart, MovePolygon, MoveVertexStart, MoveVertex, AddVertex };
         public EditorForm()
         {
             InitializeComponent();
@@ -55,7 +55,7 @@ namespace PolygonEditor
             }
             else if(current_mode == Mode.DeletePolygon)
             {
-                Polygon toDelete = GetPolygonWithPointOnSegment(new Point(e.Location.X, e.Location.Y));
+                (Polygon toDelete, (Point, Point) segment) = GetPolygonWithPointOnSegment(new Point(e.Location.X, e.Location.Y));
                 if (toDelete != null)
                     DeletePolygon(toDelete);
             }
@@ -67,6 +67,13 @@ namespace PolygonEditor
             {
                 current_mode = Mode.MoveVertexStart;
             }
+            else if(current_mode == Mode.AddVertex)
+            {
+                Point newPoint = new Point(e.Location.X, e.Location.Y);
+                (Polygon toModify, (Point,Point) segment) = GetPolygonWithPointOnSegment(newPoint);
+                if (toModify != null)
+                    AddVertex(toModify, segment, newPoint);
+            }
 
             foreach(var polygon in polygons)
                 PaintAllPoints(Brushes.Black, polygon);
@@ -77,7 +84,7 @@ namespace PolygonEditor
             if (current_mode == Mode.MovePolygonStart)
             {
                 Point p = new Point(e.Location.X, e.Location.Y);
-                Polygon toMove = GetPolygonWithPointOnSegment(p);
+                (Polygon toMove, (Point, Point) segment) = GetPolygonWithPointOnSegment(p);
                 if(toMove != null)
                 {
                     start_move_point = p;
@@ -219,6 +226,11 @@ namespace PolygonEditor
         private void VertexMoveButton_Click(object sender, EventArgs e)
         {
             current_mode = Mode.MoveVertexStart;
+        }
+
+        private void AddVertexButton_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.AddVertex;
         }
     }
 }
