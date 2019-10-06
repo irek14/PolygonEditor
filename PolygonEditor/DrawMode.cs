@@ -25,6 +25,18 @@ namespace PolygonEditor
             //TODO: Brensham algorithm
 
             graph.DrawLine(pen, p1, p2);
+
+            //int dx = Math.Abs(p2.X - p1.X), sx = p1.X < p2.X ? 1 : -1;
+            //int dy = Math.Abs(p2.Y - p1.Y), sy = p1.Y < p2.Y ? 1 : -1;
+            //int err = (dx > dy ? dx : -dy) / 2, e2;
+            //for (; ; )
+            //{
+            //    graph.FillRectangle(pen.Brush, p1.X, p1.Y, 1, 1);
+            //    if (p1.X == p2.X && p1.Y == p2.Y) break;
+            //    e2 = err;
+            //    if (e2 > -dx) { err -= dy; p1.X += sx; }
+            //    if (e2 < dy) { err += dx; p1.Y += sy; }
+            //}
         }
 
         private void CreateSegment(Point next_point)
