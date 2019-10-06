@@ -13,7 +13,7 @@ namespace PolygonEditor
 {
     public partial class EditorForm : Form
     {
-        enum Mode { None, FirstPoint, Draw, DeleteVertex };
+        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon, MoveStart, Move };
         public EditorForm()
         {
             InitializeComponent();
@@ -53,8 +53,15 @@ namespace PolygonEditor
                 }
                 polygons.RemoveAll(x => x.segments.Count == 0);
             }
+            else if(current_mode == Mode.DeletePolygon)
+            {
+                Polygon toDelete = GetPolygonWithPointOnSegment(new Point(e.Location.X, e.Location.Y));
+                if (toDelete != null)
+                    DeletePolygon(toDelete);
+            }
 
-            PaintAllPoints(Brushes.Black);
+            foreach(var polygon in polygons)
+                PaintAllPoints(Brushes.Black, polygon);
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -79,15 +86,12 @@ namespace PolygonEditor
             }
         }
 
-        private void PaintAllPoints(Brush brush )
+        private void PaintAllPoints(Brush brush, Polygon polygon)
         {
-            foreach(var polygon in polygons)
+            foreach(var apex in polygon.apex)
             {
-                foreach(var apex in polygon.apex)
-                {
-                    graph.FillRectangle(brush, apex.X-2, apex.Y-2, 4, 4);
-                }
-            }         
+                graph.FillRectangle(brush, apex.X-2, apex.Y-2, 4, 4);
+            }  
         }
 
         private bool GetNotCompletedPolygon()
@@ -151,6 +155,11 @@ namespace PolygonEditor
         private void DrawButton_Click(object sender, EventArgs e)
         {
             current_mode = Mode.FirstPoint;
+        }
+
+        private void DeletePolygonButton_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.DeletePolygon;
         }
     }
 }

@@ -51,7 +51,7 @@ namespace PolygonEditor
             foreach(var segmentToDelete in toDelete)
             {
                 polygon.segments.Remove(segmentToDelete);
-                DeleteSegment(polygon, segmentToDelete);
+                DeleteSegment(segmentToDelete);
             }
 
             for (int i = 0; i < polygon.segments.Count; i++)
@@ -66,7 +66,7 @@ namespace PolygonEditor
             graph.FillRectangle(Brushes.White, vertex.X - 2, vertex.Y - 2, 4, 4);
         }
 
-        private void DeleteSegment(Polygon polygon, (Point p1, Point p2) segment)
+        private void DeleteSegment((Point p1, Point p2) segment)
         {
             BrenshamDrawLine(new Pen(Color.White), segment.p1, segment.p2);
             foreach (var pol in polygons)

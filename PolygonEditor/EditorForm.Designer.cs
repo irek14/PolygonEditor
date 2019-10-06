@@ -34,6 +34,7 @@
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DeleteVertexButton = new System.Windows.Forms.Button();
             this.DrawButton = new System.Windows.Forms.Button();
+            this.DeletePolygonButton = new System.Windows.Forms.Button();
             this.MainTable.SuspendLayout();
             this.ToolboxPanel.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +74,7 @@
             this.ToolboxPanel.Controls.Add(this.ClearAllButton, 0, 0);
             this.ToolboxPanel.Controls.Add(this.DeleteVertexButton, 1, 0);
             this.ToolboxPanel.Controls.Add(this.DrawButton, 0, 1);
+            this.ToolboxPanel.Controls.Add(this.DeletePolygonButton, 1, 1);
             this.ToolboxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolboxPanel.Location = new System.Drawing.Point(3, 3);
             this.ToolboxPanel.Name = "ToolboxPanel";
@@ -117,6 +119,16 @@
             this.DrawButton.UseVisualStyleBackColor = true;
             this.DrawButton.Click += new System.EventHandler(this.DrawButton_Click);
             // 
+            // DeletePolygonButton
+            // 
+            this.DeletePolygonButton.Location = new System.Drawing.Point(145, 164);
+            this.DeletePolygonButton.Name = "DeletePolygonButton";
+            this.DeletePolygonButton.Size = new System.Drawing.Size(75, 23);
+            this.DeletePolygonButton.TabIndex = 3;
+            this.DeletePolygonButton.Text = "Delete polygon";
+            this.DeletePolygonButton.UseVisualStyleBackColor = true;
+            this.DeletePolygonButton.Click += new System.EventHandler(this.DeletePolygonButton_Click);
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -142,6 +154,7 @@
         private System.Windows.Forms.Button ClearAllButton;
         private System.Windows.Forms.Button DeleteVertexButton;
         private System.Windows.Forms.Button DrawButton;
+        private System.Windows.Forms.Button DeletePolygonButton;
     }
 }
 
