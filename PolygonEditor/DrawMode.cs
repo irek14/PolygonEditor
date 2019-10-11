@@ -15,9 +15,9 @@ namespace PolygonEditor
     {
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(Color.White);
-
             graph = Canvas.CreateGraphics();
+
+            PaintAll();
         }
 
         private void BrenshamDrawLine(Pen pen, Point p1, Point p2)
@@ -44,12 +44,16 @@ namespace PolygonEditor
             if (current_point == next_point) return;
 
             if (CheckIfStartPoint(next_point))
+            {
+                BrenshamDrawLine(new Pen(Color.White), (Point)current_point, (Point)next_point);
                 next_point = current_polygon.start_point;
+            }
+                
 
             current_polygon.segments.Add(((Point)current_point, next_point));
             current_polygon.apex.Add(next_point);
 
-            BrenshamDrawLine(pen, (Point)current_point, next_point);
+            //BrenshamDrawLine(pen, (Point)current_point, next_point);
             previous_point = null;
 
             current_point = next_point;
@@ -106,7 +110,7 @@ namespace PolygonEditor
             {
                 BrenshamDrawLine(new Pen(Color.White), (Point)current_point, (Point)previous_point);
 
-                PaintInstersectSegments((Point)current_point, (Point) previous_point);
+                //PaintInstersectSegments((Point)current_point, (Point)previous_point);
             }
             previous_point = new Point(e.Location.X, e.Location.Y);
 

@@ -69,14 +69,14 @@ namespace PolygonEditor
         private void DeleteSegment((Point p1, Point p2) segment)
         {
             BrenshamDrawLine(new Pen(Color.White), segment.p1, segment.p2);
-            foreach (var pol in polygons)
-            {
-                foreach (var s in pol.segments)
-                {
-                    if (CheckSegmentIntersection(segment.p1, segment.p2, s.p1, s.p2))
-                        BrenshamDrawLine(pen, s.p1, s.p2);
-                }
-            }
+            //foreach (var pol in polygons)
+            //{
+            //    foreach (var s in pol.segments)
+            //    {
+            //        if (CheckSegmentIntersection(segment.p1, segment.p2, s.p1, s.p2))
+            //            BrenshamDrawLine(pen, s.p1, s.p2);
+            //    }
+            //}
         }
     }
 }

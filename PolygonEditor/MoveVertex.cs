@@ -51,8 +51,8 @@ namespace PolygonEditor
             foreach (var segment in toDelete)
                 DeleteSegment(segment);
 
-            foreach (var segment in modifySegments)
-                BrenshamDrawLine(pen, segment.Item1, segment.Item2);
+            //foreach (var segment in modifySegments)
+            //    BrenshamDrawLine(pen, segment.Item1, segment.Item2);
         }
     }
 }

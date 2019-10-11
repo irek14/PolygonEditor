@@ -34,21 +34,21 @@ namespace PolygonEditor
                     segmentToDelete = current_polygon.segments[i];
                     current_polygon.segments[i] = (newApex1, newApex2);
                     DeleteSegment(segmentToDelete);
-                    BrenshamDrawLine(pen, newApex1, newApex2);
+                    //BrenshamDrawLine(pen, newApex1, newApex2);
                 }
                 else if(current_polygon.segments[i].p2 == segmentToMove.p1)
                 {
                     segmentToDelete = current_polygon.segments[i];                   
                     current_polygon.segments[i] = (current_polygon.segments[i].p1, newApex1);
                     DeleteSegment(segmentToDelete);
-                    BrenshamDrawLine(pen,current_polygon.segments[i].p1, newApex1);
+                    //BrenshamDrawLine(pen,current_polygon.segments[i].p1, newApex1);
                 }
                 else if(current_polygon.segments[i].p1 == segmentToMove.p2)
                 {
                     segmentToDelete = current_polygon.segments[i];
                     current_polygon.segments[i] = (newApex2, current_polygon.segments[i].p2);
                     DeleteSegment(segmentToDelete);
-                    BrenshamDrawLine(pen,newApex2, current_polygon.segments[i].p2);
+                    //BrenshamDrawLine(pen,newApex2, current_polygon.segments[i].p2);
                 }
             }
 

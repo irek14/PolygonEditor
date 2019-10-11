@@ -43,10 +43,10 @@ namespace PolygonEditor
             current_polygon.segments = newSegments;
             current_polygon.apex = newApex;
 
-            foreach(var segment in current_polygon.segments)
-            {
-                BrenshamDrawLine(pen, segment.p1, segment.p2);
-            }
+            //foreach(var segment in current_polygon.segments)
+            //{
+            //    BrenshamDrawLine(pen, segment.p1, segment.p2);
+            //}
 
             polygons.Add(current_polygon);
         }

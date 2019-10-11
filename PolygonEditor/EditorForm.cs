@@ -27,6 +27,16 @@ namespace PolygonEditor
         Mode current_mode = Mode.FirstPoint;
         Graphics graph;
 
+        private void PaintAll()
+        {
+            foreach (Polygon polygon in polygons)
+            {
+                PaintAllPoints(Brushes.Black, polygon);
+                foreach (var segment in polygon.segments)
+                    BrenshamDrawLine(pen, segment.p1, segment.p2);
+            }               
+        }
+
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {            
             if(current_mode == Mode.None)
@@ -35,14 +45,15 @@ namespace PolygonEditor
             }
             else if(current_mode == Mode.Draw)
             {
-                if (previous_point != null)
-                {
-                    BrenshamDrawLine(new Pen(Color.White), (Point)current_point, (Point)previous_point);
+                //if (previous_point != null)
+                //{
+                //    BrenshamDrawLine(new Pen(Color.White), (Point)current_point, (Point)previous_point);
 
-                    PaintInstersectSegments((Point)current_point, (Point)previous_point);
-                }
+                //    PaintInstersectSegments((Point)current_point, (Point)previous_point);
+                //}
                 Point next_point = new Point(e.Location.X, e.Location.Y);
-                CreateSegment(next_point);          
+                CreateSegment(next_point);
+                PaintAll();
             }
             else if(current_mode == Mode.DeleteVertex)
             {
@@ -50,6 +61,7 @@ namespace PolygonEditor
                 if (polygon != null)
                 {
                     DeleteVertex(polygon, vertex);
+                    PaintAll();
                 }
                 polygons.RemoveAll(x => x.segments.Count == 0);
             }
@@ -57,7 +69,11 @@ namespace PolygonEditor
             {
                 (Polygon toDelete, (Point, Point) segment) = GetPolygonWithPointOnSegment(new Point(e.Location.X, e.Location.Y));
                 if (toDelete != null)
+                {
                     DeletePolygon(toDelete);
+                    PaintAll();
+                }
+                    
             }
             else if(current_mode == Mode.MovePolygon)
             {
@@ -76,11 +92,11 @@ namespace PolygonEditor
                 Point newPoint = new Point(e.Location.X, e.Location.Y);
                 (Polygon toModify, (Point,Point) segment) = GetPolygonWithPointOnSegment(newPoint);
                 if (toModify != null)
+                {
                     AddVertex(toModify, segment, newPoint);
+                    PaintAll();
+                }                
             }
-
-            foreach(var polygon in polygons)
-                PaintAllPoints(Brushes.Black, polygon);
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
@@ -142,27 +158,29 @@ namespace PolygonEditor
             }
 
             if (current_mode == Mode.Draw && e.Button == MouseButtons.Left)
-            {
+            {                
                 CreateLine(e);
+                PaintAll();
             }
 
             if(current_mode == Mode.MovePolygon)
             {
                 MovePolygon(new Point(e.Location.X, e.Location.Y));
+                PaintAll();
             }
 
             if(current_mode == Mode.MoveVertex)
             {
                 MoveVertex(new Point(e.Location.X, e.Location.Y));
+                PaintAll();
             }
 
             if(current_mode == Mode.MoveSegment)
             {
                 MoveSegment(new Point(e.Location.X, e.Location.Y));
+                PaintAll();
             }
 
-            foreach (var polygon in polygons)
-                PaintAllPoints(Brushes.Black, polygon);
         }
 
         private void PaintAllPoints(Brush brush, Polygon polygon)
