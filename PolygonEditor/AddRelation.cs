@@ -55,6 +55,14 @@ namespace PolygonEditor
 
             MessageBox.Show("Relation complete", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        public void DeleteRelation(Polygon polygon, (Point p1, Point p2)segment)
+        {
+            var result = polygon.relations.RemoveAll(x => (x.first_segment.p1 == segment.p1 && x.first_segment.p2 == segment.p2) || (x.second_segment.p1 == segment.p1 && x.second_segment.p2 == segment.p2));
+
+            if(result != 0)
+                MessageBox.Show($"Relation was deleted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
     }
 
 }

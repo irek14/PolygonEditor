@@ -52,6 +52,7 @@ namespace PolygonEditor
             {
                 polygon.segments.Remove(segmentToDelete);
                 DeleteSegment(segmentToDelete);
+                DeleteRelation(polygon, segmentToDelete);
             }
 
             for (int i = 0; i < polygon.segments.Count; i++)

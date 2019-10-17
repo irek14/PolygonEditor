@@ -15,6 +15,8 @@ namespace PolygonEditor
     {
         private void AddVertex(Polygon polygon, (Point p1, Point p2) segment, Point newPoint)
         {
+            DeleteRelation(polygon, segment);
+
             List<Point> newApex = new List<Point>();
             List<(Point, Point)> newSegments = new List<(Point, Point)>();
             polygons.Remove(polygon);
