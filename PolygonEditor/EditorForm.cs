@@ -13,7 +13,7 @@ namespace PolygonEditor
 {
     public partial class EditorForm : Form
     {
-        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon, MovePolygonStart, MovePolygon, MoveVertexStart, MoveVertex, MoveSegmentStart, MoveSegment, AddVertex};
+        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon, MovePolygonStart, MovePolygon, MoveVertexStart, MoveVertex, MoveSegmentStart, MoveSegment, AddVertex, AddSameLengthRelation, AddPerpendicularRelation};
         public EditorForm()
         {
             InitializeComponent();
@@ -38,8 +38,11 @@ namespace PolygonEditor
         }
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
-        {            
-            if(current_mode == Mode.None)
+        {
+            if (current_mode != Mode.AddPerpendicularRelation && current_mode != Mode.AddSameLengthRelation)
+                first_to_relation = (new Point(-1, -1), new Point(-1, -1));
+
+            if (current_mode == Mode.None)
             {
                 current_mode = Mode.FirstPoint;
             }
@@ -139,10 +142,22 @@ namespace PolygonEditor
                     Cursor.Current = Cursors.NoMove2D;
                 }
             }
+            else if(current_mode == Mode.AddSameLengthRelation || current_mode == Mode.AddPerpendicularRelation)
+            {
+                Point p = new Point(e.Location.X, e.Location.Y);
+                (Polygon toRelation, (Point p1, Point p2) segment) = GetPolygonWithPointOnSegment(p);
+                if(toRelation != null)
+                {
+                    AddRelation(toRelation, segment);
+                }
+            }
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
+            if(current_mode != Mode.AddPerpendicularRelation && current_mode != Mode.AddSameLengthRelation)
+                first_to_relation = (new Point(-1, -1), new Point(-1, -1));
+
             if (current_mode == Mode.FirstPoint && e.Button == MouseButtons.Left)
             {
                 current_mode = Mode.Draw;
@@ -308,6 +323,18 @@ namespace PolygonEditor
             }
 
             selectedMenuItem.Checked = true;
+        }
+
+        private void sameLengthToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.AddSameLengthRelation;
+            UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
+        }
+
+        private void perpendicularToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.AddPerpendicularRelation;
+            UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
         }
     }
 }

@@ -81,14 +81,14 @@
             this.drawToolStripMenuItem1.CheckOnClick = true;
             this.drawToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.drawToolStripMenuItem1.Name = "drawToolStripMenuItem1";
-            this.drawToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
+            this.drawToolStripMenuItem1.Size = new System.Drawing.Size(138, 26);
             this.drawToolStripMenuItem1.Text = "Draw";
             this.drawToolStripMenuItem1.Click += new System.EventHandler(this.drawToolStripMenuItem1_Click);
             // 
             // clearAllToolStripMenuItem1
             // 
             this.clearAllToolStripMenuItem1.Name = "clearAllToolStripMenuItem1";
-            this.clearAllToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
+            this.clearAllToolStripMenuItem1.Size = new System.Drawing.Size(138, 26);
             this.clearAllToolStripMenuItem1.Text = "Clear all";
             this.clearAllToolStripMenuItem1.Click += new System.EventHandler(this.clearAllToolStripMenuItem1_Click);
             // 
@@ -185,15 +185,17 @@
             // 
             this.sameLengthToolStripMenuItem.CheckOnClick = true;
             this.sameLengthToolStripMenuItem.Name = "sameLengthToolStripMenuItem";
-            this.sameLengthToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
+            this.sameLengthToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.sameLengthToolStripMenuItem.Text = "Same length";
+            this.sameLengthToolStripMenuItem.Click += new System.EventHandler(this.sameLengthToolStripMenuItem_Click);
             // 
             // perpendicularToolStripMenuItem
             // 
             this.perpendicularToolStripMenuItem.CheckOnClick = true;
             this.perpendicularToolStripMenuItem.Name = "perpendicularToolStripMenuItem";
-            this.perpendicularToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
+            this.perpendicularToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.perpendicularToolStripMenuItem.Text = "Perpendicular";
+            this.perpendicularToolStripMenuItem.Click += new System.EventHandler(this.perpendicularToolStripMenuItem_Click);
             // 
             // MainTable
             // 

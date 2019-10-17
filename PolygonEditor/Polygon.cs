@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace PolygonEditor
 {
-    class Polygon
+    public class Polygon
     {
         public Point start_point;
         public List<Point> apex = new List<Point>();
         public List<(Point p1, Point p2)> segments = new List<(Point, Point)>();
+        public List<Relation> relations;
 
         public Polygon(Point start_point)
         {
@@ -20,6 +21,7 @@ namespace PolygonEditor
             apex.Add(start_point);
 
             segments = new List<(Point p1, Point p2)>();
+            relations = new List<Relation>();
         }
 
         public Polygon()
