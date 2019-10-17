@@ -40,6 +40,7 @@ namespace PolygonEditor
                 newApex.Add(point);
             }
 
+            current_polygon.relations = GetRelationAfterMovePolygon(current_polygon.relations, current_polygon.segments, newSegments);
             current_polygon.segments = newSegments;
             current_polygon.apex = newApex;
 
@@ -49,6 +50,21 @@ namespace PolygonEditor
             //}
 
             polygons.Add(current_polygon);
+        }
+
+        private List<Relation> GetRelationAfterMovePolygon(List<Relation> relation, List<(Point p1, Point p2)> old_segment, List<(Point p1, Point p2)> new_segment)
+        {
+            for (int i = 0; i < relation.Count; i++)
+            {
+                int index = old_segment.IndexOf(relation[i].first_segment);
+                if (index != -1)
+                    relation[i].first_segment = new_segment[index];
+
+                index = old_segment.IndexOf(relation[i].second_segment);
+                if (index != -1)
+                    relation[i].second_segment = new_segment[index];
+            }
+            return relation;
         }
     }
 }
