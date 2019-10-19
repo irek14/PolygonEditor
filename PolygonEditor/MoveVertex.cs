@@ -20,37 +20,18 @@ namespace PolygonEditor
 
             Polygon tmp = new Polygon(current_polygon);
 
-            //for (int i=0; i<tmp.apex.Count; i++)
-            //{
-            //    if(tmp.apex[i] == vertex_to_move)
-            //    {
-            //        tmp.apex[i] = p;
-            //        break;
-            //    }
-            //}
-
             List<(Point, Point)> toDelete = new List<(Point, Point)>();
-            List<(Point, Point)> modifySegments = new List<(Point, Point)>();
 
             for (int i = 0; i < tmp.segments.Count; i++)
             {
                 if (tmp.segments[i].p1 == vertex_to_move)
-                {
                     toDelete.Add(tmp.segments[i]);
-                    //tmp.segments[i] = (p, tmp.segments[i].p2);
-                    //modifySegments.Add(tmp.segments[i]);
-                }
+
                 if(tmp.segments[i].p2 == vertex_to_move)
-                {
                     toDelete.Add(tmp.segments[i]);
-                    //tmp.segments[i] = (tmp.segments[i].p1,p);
-                    //modifySegments.Add(tmp.segments[i]);
-                }
             }
 
             int index = tmp.apex.IndexOf(vertex_to_move);
-            //if (index == -1)
-            //    return;
             CorrectPolygonAfterRelation(ref tmp, vertex_to_move, p);
             
             Polygon newPolygon = RelationPossible(tmp, index);
@@ -62,10 +43,6 @@ namespace PolygonEditor
             }
             else
             {
-                //CorrectPolygonAfterRelation(ref newPolygon, vertex_to_move, p);
-
-                //CorrectPolygonAfterRelation(ref newPolygon, vertex_to_move, p);
-                //vertex_to_move = p;
 
                 foreach (var segment in toDelete)
                     DeleteSegment(segment);
@@ -76,11 +53,6 @@ namespace PolygonEditor
 
                 vertex_to_move = current_polygon.apex[index];
             }
-
-
-
-            //foreach (var segment in modifySegments)
-            //    BrenshamDrawLine(pen, segment.Item1, segment.Item2);
         }
     }
 }

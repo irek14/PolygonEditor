@@ -39,7 +39,7 @@ namespace PolygonEditor
                 return;
             }
 
-            if(first_to_relation.p1 == segment.p1 && first_to_relation.p2 == segment.p2)
+            if (first_to_relation.p1 == segment.p1 && first_to_relation.p2 == segment.p2)
             {
                 MessageBox.Show("You cannot assign relation between the same segment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 first_to_relation = (new Point(-1, -1), new Point(-1, -1));
@@ -74,11 +74,11 @@ namespace PolygonEditor
 
         }
 
-        private void DeleteRelation(Polygon polygon, (Point p1, Point p2)segment)
+        private void DeleteRelation(Polygon polygon, (Point p1, Point p2) segment)
         {
             var result = polygon.relations.RemoveAll(x => (x.first_segment.p1 == segment.p1 && x.first_segment.p2 == segment.p2) || (x.second_segment.p1 == segment.p1 && x.second_segment.p2 == segment.p2));
 
-            if(result != 0)
+            if (result != 0)
                 MessageBox.Show($"Relation was deleted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
@@ -88,15 +88,30 @@ namespace PolygonEditor
             double length = Math.Sqrt((segment.p1.X - segment.p2.X) * (segment.p1.X - segment.p2.X) + (segment.p1.Y - segment.p2.Y) * (segment.p1.Y - segment.p2.Y));
 
             double straightA = ((double)(previous_point.Y - p.Y)) / ((double)(previous_point.X - p.X));
+            if(double.IsNegativeInfinity(straightA))
+            {
+                return new Point(p.X, p.Y - (int)length);
+            }
+            if(double.IsPositiveInfinity(straightA))
+            {
+                return new Point(p.X, p.Y + (int)length);
+            }
+            if(double.IsNaN(straightA))
+            {
+                if(Math.Abs(p.Y-length)<Math.Abs(p.Y+length))
+                    return new Point(p.X, p.Y - (int)length);
+
+                return new Point(p.X, p.Y + (int)length);
+            }
             double straightB = p.Y - straightA * p.X;
 
-            double a = 1 + straightA*straightA;
+            double a = 1 + straightA * straightA;
             double b = 2 * straightA * straightB - 2 * p.X - 2 * straightA * p.Y;
-            double c = p.X*p.X + p.Y*p.Y + straightB*straightB - 2*p.Y*straightB - length * length;
+            double c = p.X * p.X + p.Y * p.Y + straightB * straightB - 2 * p.Y * straightB - length * length;
 
             double d = b * b - 4 * a * c;
 
-            if(d == 0)
+            if (d == 0)
             {
                 x1 = Math.Ceiling(-b / (2.0 * a));
                 x2 = x1;
