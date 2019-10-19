@@ -317,11 +317,8 @@ namespace PolygonEditor
                 {
                     item.Checked = false;
                    
-                }
-                
-             
+                }                            
             }
-
             selectedMenuItem.Checked = true;
         }
 
@@ -329,6 +326,8 @@ namespace PolygonEditor
         {
             current_mode = Mode.AddSameLengthRelation;
             UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
+
+            var test = GetPointSameLength(new Point(0, 2), new Point(2, 6), (new Point(6, 0), new Point(6, 10)));
         }
 
         private void perpendicularToolStripMenuItem_Click(object sender, EventArgs e)
