@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,10 +28,36 @@ namespace PolygonEditor
         Mode current_mode = Mode.FirstPoint;
         Graphics graph;
 
+        private void PainGraphics(Polygon polygon)
+        {
+            Random rnd = new Random();
+
+            foreach(var relation in polygon.relations)
+            {
+                Brush result = Brushes.Transparent;
+
+                Type brushesType = typeof(Brushes);
+
+                PropertyInfo[] properties = brushesType.GetProperties();
+
+                int random = rnd.Next(properties.Length);
+                result = (Brush)properties[random].GetValue(null, null);
+
+                float x1 = Math.Max(relation.first_segment.p1.X, relation.first_segment.p2.X) - Math.Abs((relation.first_segment.p1.X - relation.first_segment.p2.X)) / 2;
+                float y1 = Math.Max(relation.first_segment.p1.Y, relation.first_segment.p2.Y) - Math.Abs((relation.first_segment.p1.Y - relation.first_segment.p2.Y)) / 2;
+                float x2 = Math.Max(relation.second_segment.p1.X, relation.second_segment.p2.X) - Math.Abs((relation.second_segment.p1.X - relation.second_segment.p2.X)) / 2;
+                float y2 = Math.Max(relation.second_segment.p1.Y, relation.second_segment.p2.Y) - Math.Abs((relation.second_segment.p1.Y - relation.second_segment.p2.Y)) / 2;
+
+                graph.FillEllipse(result, x1, y1, 10, 10);
+                graph.FillEllipse(result, x2, y2,10,10);
+            }
+        }
+
         private void PaintAll()
         {
             foreach (Polygon polygon in polygons)
             {
+                PainGraphics(polygon);
                 PaintAllPoints(Brushes.Black, polygon);
                 foreach (var segment in polygon.segments)
                     BrenshamDrawLine(pen, segment.p1, segment.p2);

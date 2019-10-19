@@ -49,14 +49,17 @@ namespace PolygonEditor
 
             RelationTypes type = current_mode == Mode.AddSameLengthRelation ? RelationTypes.SameLength : RelationTypes.Perpendicular;
 
-            polygon.relations.Add(new Relation(type, first_to_relation, segment));
-            polygon.relations.Add(new Relation(type, segment, first_to_relation));
-
             int indexOfApex = polygon.apex.IndexOf(segment.p2);
-            Polygon newPolygon = RelationPossible(polygon, indexOfApex);
+            Polygon tmp = new Polygon(polygon);
+            tmp.relations.Add(new Relation(type, first_to_relation, segment));
+            tmp.relations.Add(new Relation(type, segment, first_to_relation));
+
+            Polygon newPolygon = RelationPossible(tmp, indexOfApex);
+
             if (newPolygon != null)
             {
-                polygon = newPolygon;
+                polygons.Remove(polygon);
+                polygons.Add(newPolygon);
                 MessageBox.Show("Relation complete", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Canvas.Invalidate();
             }
@@ -225,7 +228,7 @@ namespace PolygonEditor
                 double length1 = GetSegmentLenght(relation.first_segment.p1, relation.first_segment.p2);
                 double length2 = GetSegmentLenght(relation.second_segment.p1, relation.second_segment.p2);
 
-                if (Math.Abs(length1 - length2) > 3)
+                if (Math.Abs(length1 - length2) > 50)
                     return false;
             }
             return true;

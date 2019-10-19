@@ -28,5 +28,13 @@ namespace PolygonEditor
         {
 
         }
+
+        public Polygon(Polygon p)
+        {
+            start_point = p.start_point;
+            apex = new List<Point>(p.apex);
+            segments = new List<(Point, Point)>(p.segments);
+            relations = new List<Relation>(p.relations);
+        }
     }
 }
