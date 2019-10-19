@@ -128,6 +128,28 @@ namespace PolygonEditor
             return new Point((int)newX, (int)newY);
         }
 
+        private Point GetPointPerpendicular(Point p, Point previous_point, (Point p1, Point p2) segment)
+        {
+            Point result;
+
+            double straightA = 0;
+            double perpendicularStraightA = ((double)(segment.p1.Y - segment.p2.Y)) / ((double)(segment.p1.X - segment.p2.X));
+            if (double.IsInfinity(perpendicularStraightA))
+                straightA = 0;
+            else if(perpendicularStraightA == 0)
+            {
+                result = new Point(p.X, previous_point.Y);
+            }
+            else
+                straightA = (-1) * perpendicularStraightA;
+
+            double straightB = p.Y - straightA * p.X;
+
+            result = new Point(previous_point.X, (int)(straightA * previous_point.X + straightB));
+
+            return result;
+        }
+
         private Polygon RelationPossible(Polygon polygon, int index)
         {
             int i = index-1;
