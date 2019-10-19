@@ -115,7 +115,7 @@ namespace PolygonEditor
 
         private Polygon RelationPossible(Polygon polygon, int index)
         {
-            int i = index - 1;
+            int i = index-1;
             while(true)
             {
                 if(i==-1)
@@ -139,23 +139,23 @@ namespace PolygonEditor
                 (Point, Point) first_segment = relation.first_segment;
                 (Point, Point) second_segment = relation.second_segment;
 
-                Point newPoint = GetPointSameLength(first_segment.Item1, first_segment.Item2, second_segment);
+                Point newPoint = GetPointSameLength(first_segment.Item2, first_segment.Item1, second_segment);
 
                 //BrenshamDrawLine(new Pen(Color.White), first_segment.Item1, first_segment.Item2);
                 //BrenshamDrawLine(new Pen(Color.Red), first_segment.Item1, newPoint);
 
-                CorrectPolygonAfterRelation(ref polygon, first_segment.Item2, newPoint);
+                CorrectPolygonAfterRelation(ref polygon, first_segment.Item1, newPoint);
 
                 i--;
             }
 
-            i = index + 1;
+            i = index;
             while (true)
             {
                 if (i == polygon.segments.Count)
                     i = 0;
 
-                if (i == index)
+                if (i == index-1)
                 {
                     if (CheckAllRelation(polygon))
                         return polygon;
@@ -173,12 +173,12 @@ namespace PolygonEditor
                 (Point, Point) first_segment = relation.first_segment;
                 (Point, Point) second_segment = relation.second_segment;
 
-                Point newPoint = GetPointSameLength(first_segment.Item1, first_segment.Item2, second_segment);
+                Point newPoint = GetPointSameLength(first_segment.Item2, first_segment.Item1, second_segment);
 
                 //BrenshamDrawLine(new Pen(Color.White), first_segment.Item1, first_segment.Item2);
                 //BrenshamDrawLine(new Pen(Color.Red), first_segment.Item1, newPoint);
 
-                CorrectPolygonAfterRelation(ref polygon, first_segment.Item2, newPoint);
+                CorrectPolygonAfterRelation(ref polygon, first_segment.Item1, newPoint);
                 i++;
             }
 

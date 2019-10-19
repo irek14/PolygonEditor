@@ -20,6 +20,7 @@ namespace PolygonEditor
             InitializeComponent();
         }
 
+        bool block = false;
         Pen pen = new Pen(Color.Black);
         Point? current_point = null;
         Point? previous_point = null;
@@ -28,7 +29,7 @@ namespace PolygonEditor
         Mode current_mode = Mode.FirstPoint;
         Graphics graph;
 
-        private void PainGraphics(Polygon polygon)
+        private void PainGraphics(Polygon polygon, bool white=false)
         {
             Random rnd = new Random();
 
@@ -42,6 +43,9 @@ namespace PolygonEditor
 
                 int random = rnd.Next(properties.Length);
                 result = (Brush)properties[random].GetValue(null, null);
+
+                if (white)
+                    result = Brushes.White;
 
                 float x1 = Math.Max(relation.first_segment.p1.X, relation.first_segment.p2.X) - Math.Abs((relation.first_segment.p1.X - relation.first_segment.p2.X)) / 2;
                 float y1 = Math.Max(relation.first_segment.p1.Y, relation.first_segment.p2.Y) - Math.Abs((relation.first_segment.p1.Y - relation.first_segment.p2.Y)) / 2;
@@ -207,14 +211,21 @@ namespace PolygonEditor
 
             if(current_mode == Mode.MovePolygon)
             {
+                PainGraphics(current_polygon, true);
                 MovePolygon(new Point(e.Location.X, e.Location.Y));
                 PaintAll();
             }
 
             if(current_mode == Mode.MoveVertex)
             {
+                if (block)
+                    return;
+
+                block = true;
                 MoveVertex(new Point(e.Location.X, e.Location.Y));
-                PaintAll();
+                //PaintAll();
+                Canvas.Invalidate();
+                block = false;
             }
 
             if(current_mode == Mode.MoveSegment)

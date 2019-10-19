@@ -18,38 +18,66 @@ namespace PolygonEditor
         {
             graph.FillRectangle(Brushes.White, vertex_to_move.X - 2, vertex_to_move.Y - 2, 4, 4);
 
-            for (int i=0; i<current_polygon.apex.Count; i++)
-            {
-                if(current_polygon.apex[i] == vertex_to_move)
-                {
-                    current_polygon.apex[i] = p;
-                    break;
-                }
-            }
+            Polygon tmp = new Polygon(current_polygon);
+
+            //for (int i=0; i<tmp.apex.Count; i++)
+            //{
+            //    if(tmp.apex[i] == vertex_to_move)
+            //    {
+            //        tmp.apex[i] = p;
+            //        break;
+            //    }
+            //}
 
             List<(Point, Point)> toDelete = new List<(Point, Point)>();
             List<(Point, Point)> modifySegments = new List<(Point, Point)>();
 
-            for (int i = 0; i < current_polygon.segments.Count; i++)
+            for (int i = 0; i < tmp.segments.Count; i++)
             {
-                if (current_polygon.segments[i].p1 == vertex_to_move)
+                if (tmp.segments[i].p1 == vertex_to_move)
                 {
-                    toDelete.Add(current_polygon.segments[i]);
-                    current_polygon.segments[i] = (p, current_polygon.segments[i].p2);
-                    modifySegments.Add(current_polygon.segments[i]);
+                    toDelete.Add(tmp.segments[i]);
+                    //tmp.segments[i] = (p, tmp.segments[i].p2);
+                    //modifySegments.Add(tmp.segments[i]);
                 }
-                if(current_polygon.segments[i].p2 == vertex_to_move)
+                if(tmp.segments[i].p2 == vertex_to_move)
                 {
-                    toDelete.Add(current_polygon.segments[i]);
-                    current_polygon.segments[i] = (current_polygon.segments[i].p1,p);
-                    modifySegments.Add(current_polygon.segments[i]);
+                    toDelete.Add(tmp.segments[i]);
+                    //tmp.segments[i] = (tmp.segments[i].p1,p);
+                    //modifySegments.Add(tmp.segments[i]);
                 }
             }
 
-            vertex_to_move = p;
+            int index = tmp.apex.IndexOf(vertex_to_move);
+            //if (index == -1)
+            //    return;
+            CorrectPolygonAfterRelation(ref tmp, vertex_to_move, p);
+            
+            Polygon newPolygon = RelationPossible(tmp, index);
 
-            foreach (var segment in toDelete)
-                DeleteSegment(segment);
+            if(newPolygon == null || index == -1)
+            {
+                MessageBox.Show("Zjebało sie", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                current_mode = Mode.MoveVertexStart;
+            }
+            else
+            {
+                //CorrectPolygonAfterRelation(ref newPolygon, vertex_to_move, p);
+
+                //CorrectPolygonAfterRelation(ref newPolygon, vertex_to_move, p);
+                //vertex_to_move = p;
+
+                foreach (var segment in toDelete)
+                    DeleteSegment(segment);
+
+                polygons.Remove(current_polygon);
+                polygons.Add(newPolygon);
+                current_polygon = newPolygon;
+
+                vertex_to_move = current_polygon.apex[index];
+            }
+
+
 
             //foreach (var segment in modifySegments)
             //    BrenshamDrawLine(pen, segment.Item1, segment.Item2);
