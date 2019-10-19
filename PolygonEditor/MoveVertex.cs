@@ -25,10 +25,10 @@ namespace PolygonEditor
             for (int i = 0; i < tmp.segments.Count; i++)
             {
                 if (tmp.segments[i].p1 == vertex_to_move)
-                    toDelete.Add(tmp.segments[i]);
+                    DeleteSegment(tmp.segments[i]);
 
-                if(tmp.segments[i].p2 == vertex_to_move)
-                    toDelete.Add(tmp.segments[i]);
+                if (tmp.segments[i].p2 == vertex_to_move)
+                    DeleteSegment(tmp.segments[i]);
             }
 
             int index = tmp.apex.IndexOf(vertex_to_move);
@@ -36,17 +36,13 @@ namespace PolygonEditor
             
             Polygon newPolygon = RelationPossible(tmp, index);
 
-            if(newPolygon == null || index == -1)
+            if(newPolygon == null)
             {
                 MessageBox.Show("Zjebało sie", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 current_mode = Mode.MoveVertexStart;
             }
             else
             {
-
-                foreach (var segment in toDelete)
-                    DeleteSegment(segment);
-
                 polygons.Remove(current_polygon);
                 polygons.Add(newPolygon);
                 current_polygon = newPolygon;

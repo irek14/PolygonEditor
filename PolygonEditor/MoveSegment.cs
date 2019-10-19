@@ -24,44 +24,76 @@ namespace PolygonEditor
             int dY = start_move_point.Y - p.Y;
             (Point, Point) segmentToDelete;
 
+            Polygon tmp = new Polygon(current_polygon);
+
+
             Point newApex1 = new Point(segmentToMove.p1.X - dX, segmentToMove.p1.Y - dY);
             Point newApex2 = new Point(segmentToMove.p2.X - dX, segmentToMove.p2.Y - dY);
 
-            for(int i=0; i<current_polygon.segments.Count; i++)
+            int index1 = tmp.apex.IndexOf(segmentToMove.p1);
+            int index2 = tmp.apex.IndexOf(segmentToMove.p2);
+
+            CorrectPolygonAfterRelation(ref tmp, segmentToMove.p1, newApex1);
+            CorrectPolygonAfterRelation(ref tmp, segmentToMove.p2, newApex2);
+
+            Polygon newPolygon = RelationPossible(tmp, index1);
+            if(newPolygon == null)
             {
-                if(current_polygon.segments[i].p1 == segmentToMove.p1 && current_polygon.segments[i].p2 == segmentToMove.p2)
-                {
-                    segmentToDelete = current_polygon.segments[i];
-                    current_polygon.segments[i] = (newApex1, newApex2);
-                    DeleteSegment(segmentToDelete);
-                    //BrenshamDrawLine(pen, newApex1, newApex2);
-                }
-                else if(current_polygon.segments[i].p2 == segmentToMove.p1)
-                {
-                    segmentToDelete = current_polygon.segments[i];                   
-                    current_polygon.segments[i] = (current_polygon.segments[i].p1, newApex1);
-                    DeleteSegment(segmentToDelete);
-                    //BrenshamDrawLine(pen,current_polygon.segments[i].p1, newApex1);
-                }
-                else if(current_polygon.segments[i].p1 == segmentToMove.p2)
-                {
-                    segmentToDelete = current_polygon.segments[i];
-                    current_polygon.segments[i] = (newApex2, current_polygon.segments[i].p2);
-                    DeleteSegment(segmentToDelete);
-                    //BrenshamDrawLine(pen,newApex2, current_polygon.segments[i].p2);
-                }
+                MessageBox.Show("Zjebało sie", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                current_mode = Mode.MoveVertexStart;
+                return;
             }
 
-            for(int i =0; i<current_polygon.apex.Count; i++)
+            newPolygon = RelationPossible(tmp, index2);
+            if (newPolygon == null)
             {
-                if (current_polygon.apex[i] == segmentToMove.p1)
-                    current_polygon.apex[i] = newApex1;
-                else if(current_polygon.apex[i] == segmentToMove.p2)
-                    current_polygon.apex[i] = newApex2;
+                MessageBox.Show("Zjebało sie", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                current_mode = Mode.MoveVertexStart;
+                return;
             }
 
-            segmentToMove = (newApex1, newApex2);
+            polygons.Remove(current_polygon);
+            polygons.Add(newPolygon);
+            current_polygon = newPolygon;
+
+            segmentToMove = (newPolygon.apex[index1], newPolygon.apex[index2]);
             start_move_point = p;
+
+            //for (int i=0; i<current_polygon.segments.Count; i++)
+            //{
+            //    if(current_polygon.segments[i].p1 == segmentToMove.p1 && current_polygon.segments[i].p2 == segmentToMove.p2)
+            //    {
+            //        segmentToDelete = current_polygon.segments[i];
+            //        current_polygon.segments[i] = (newApex1, newApex2);
+            //        DeleteSegment(segmentToDelete);
+            //        //BrenshamDrawLine(pen, newApex1, newApex2);
+            //    }
+            //    else if(current_polygon.segments[i].p2 == segmentToMove.p1)
+            //    {
+            //        segmentToDelete = current_polygon.segments[i];                   
+            //        current_polygon.segments[i] = (current_polygon.segments[i].p1, newApex1);
+            //        DeleteSegment(segmentToDelete);
+            //        //BrenshamDrawLine(pen,current_polygon.segments[i].p1, newApex1);
+            //    }
+            //    else if(current_polygon.segments[i].p1 == segmentToMove.p2)
+            //    {
+            //        segmentToDelete = current_polygon.segments[i];
+            //        current_polygon.segments[i] = (newApex2, current_polygon.segments[i].p2);
+            //        DeleteSegment(segmentToDelete);
+            //        //BrenshamDrawLine(pen,newApex2, current_polygon.segments[i].p2);
+            //    }
+            //}
+
+            //for(int i =0; i<current_polygon.apex.Count; i++)
+            //{
+            //    if (current_polygon.apex[i] == segmentToMove.p1)
+            //        current_polygon.apex[i] = newApex1;
+            //    else if(current_polygon.apex[i] == segmentToMove.p2)
+            //        current_polygon.apex[i] = newApex2;
+            //}
+
+            //segmentToMove = (newApex1, newApex2);
+            //start_move_point = p;
         }
     }
 }

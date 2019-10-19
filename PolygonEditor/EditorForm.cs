@@ -218,20 +218,15 @@ namespace PolygonEditor
 
             if(current_mode == Mode.MoveVertex)
             {
-                if (block)
-                    return;
-
-                block = true;
                 MoveVertex(new Point(e.Location.X, e.Location.Y));
-                //PaintAll();
                 Canvas.Invalidate();
-                block = false;
             }
 
             if(current_mode == Mode.MoveSegment)
             {
                 MoveSegment(new Point(e.Location.X, e.Location.Y));
-                PaintAll();
+                Canvas.Invalidate();
+                //PaintAll();
             }
 
         }
