@@ -59,7 +59,7 @@ namespace PolygonEditor
                 maxY = segment.p2.Y;
             }
 
-            return p.X >= minX && p.X <= maxX && p.Y >= minY && p.Y <= maxY;
+            return p.X >= minX-3 && p.X <= maxX+3 && p.Y >= minY-3 && p.Y <= maxY+3;
         }
     }
 }
