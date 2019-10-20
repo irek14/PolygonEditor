@@ -112,5 +112,11 @@
   <ItemGroup>
     <None Include="images\DeleteDustbin-512.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\EqualsIcon.png" />
+    <Content Include="images\PerpendicularIcon.jpg" />
+    <Content Include="Resources\EqualsIcon.png" />
+    <Content Include="Resources\PerpendicularIcon.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

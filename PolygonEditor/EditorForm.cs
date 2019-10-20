@@ -1,8 +1,10 @@
-﻿using System;
+﻿using PolygonEditor.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -212,38 +214,37 @@ namespace PolygonEditor
             return true;
         }
 
-        private void PaintGraphics(Polygon polygon, bool white = false)
+        private void PaintGraphics(Polygon polygon)
         {
-            //TODO: relation icons
-            Random rnd = new Random();
+            Color[] colors = new Color[] { Color.Green, Color.Green, Color.Yellow, Color.Yellow, Color.Red, Color.Red, Color.Pink, Color.Pink, Color.Fuchsia, Color.Fuchsia, Color.Orange, Color.Orange, Color.Gold, Color.Gold, Color.Coral, Color.Coral };
+            int colorIndex = 0;
 
             foreach (var relation in polygon.relations)
             {
-                Brush result = Brushes.Transparent;
-
-                Type brushesType = typeof(Brushes);
-
-                PropertyInfo[] properties = brushesType.GetProperties();
-
-                int random = rnd.Next(properties.Length);
-                result = (Brush)properties[random].GetValue(null, null);
-
-                if (white)
-                    result = Brushes.White;
-
-                float x1 = Math.Max(relation.first_segment.p1.X, relation.first_segment.p2.X) - Math.Abs((relation.first_segment.p1.X - relation.first_segment.p2.X)) / 2;
-                float y1 = Math.Max(relation.first_segment.p1.Y, relation.first_segment.p2.Y) - Math.Abs((relation.first_segment.p1.Y - relation.first_segment.p2.Y)) / 2;
-                float x2 = Math.Max(relation.second_segment.p1.X, relation.second_segment.p2.X) - Math.Abs((relation.second_segment.p1.X - relation.second_segment.p2.X)) / 2;
-                float y2 = Math.Max(relation.second_segment.p1.Y, relation.second_segment.p2.Y) - Math.Abs((relation.second_segment.p1.Y - relation.second_segment.p2.Y)) / 2;
+                int x1 = Math.Max(relation.first_segment.p1.X, relation.first_segment.p2.X) - Math.Abs((relation.first_segment.p1.X - relation.first_segment.p2.X)) / 2;
+                int y1 = Math.Max(relation.first_segment.p1.Y, relation.first_segment.p2.Y) - Math.Abs((relation.first_segment.p1.Y - relation.first_segment.p2.Y)) / 2;
+                int x2 = Math.Max(relation.second_segment.p1.X, relation.second_segment.p2.X) - Math.Abs((relation.second_segment.p1.X - relation.second_segment.p2.X)) / 2;
+                int y2 = Math.Max(relation.second_segment.p1.Y, relation.second_segment.p2.Y) - Math.Abs((relation.second_segment.p1.Y - relation.second_segment.p2.Y)) / 2;
 
                 try
                 {
-                    graph.FillEllipse(result, x1, y1, 10, 10);
-                    graph.FillEllipse(result, x2, y2, 10, 10);
+                    graph.FillRectangle(new SolidBrush(colors[colorIndex % colors.Length]), x1 - 2, y1 - 2, 20, 20);
+                    graph.FillRectangle(new SolidBrush(colors[colorIndex % colors.Length]), x2 - 2, y2 - 2, 20, 20);
+                    colorIndex++;
+                    if (relation.type == RelationTypes.Perpendicular)
+                    {
+                        graph.DrawImage(Resources.PerpendicularIcon, new Point(x1, y1));
+                        graph.DrawImage(Resources.PerpendicularIcon, new Point(x2, y2));
+                    }
+                    else
+                    {
+                        graph.DrawImage(Resources.EqualsIcon, new Point(x1, y1));
+                        graph.DrawImage(Resources.EqualsIcon, new Point(x2, y2));
+                    }
                 }
                 catch (Exception e)
                 {
-
+                    
                 }
             }
         }

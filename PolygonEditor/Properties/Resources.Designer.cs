@@ -63,9 +63,9 @@ namespace PolygonEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap DeleteDustbin_512 {
+        internal static System.Drawing.Bitmap EqualsIcon {
             get {
-                object obj = ResourceManager.GetObject("DeleteDustbin-512", resourceCulture);
+                object obj = ResourceManager.GetObject("EqualsIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace PolygonEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_clear_19 {
+        internal static System.Drawing.Bitmap PerpendicularIcon {
             get {
-                object obj = ResourceManager.GetObject("icon-clear-19", resourceCulture);
+                object obj = ResourceManager.GetObject("PerpendicularIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

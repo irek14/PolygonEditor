@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,8 @@ namespace PolygonEditor
         public RelationTypes type;
         public (Point p1, Point p2) first_segment;
         public (Point p1, Point p2) second_segment;
+
+        Random rnd = new Random();
 
         public Relation(RelationTypes type, (Point p1, Point p2) first_segment, (Point p1, Point p2) second_segment)
         {
