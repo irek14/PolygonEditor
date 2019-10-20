@@ -16,7 +16,7 @@ namespace PolygonEditor
 {
     public partial class EditorForm : Form
     {
-        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon, MovePolygonStart, MovePolygon, MoveVertexStart, MoveVertex, MoveSegmentStart, MoveSegment, AddVertex, AddSameLengthRelation, AddPerpendicularRelation};
+        enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon,DeleteRelation, MovePolygonStart, MovePolygon, MoveVertexStart, MoveVertex, MoveSegmentStart, MoveSegment, AddVertex, AddSameLengthRelation, AddPerpendicularRelation};
         public EditorForm()
         {
             InitializeComponent();
@@ -62,8 +62,15 @@ namespace PolygonEditor
                 if (toDelete != null)
                 {
                     DeletePolygon(toDelete);
+                }                    
+            }
+            else if(current_mode == Mode.DeleteRelation)
+            {
+                (Polygon polygon, (Point, Point) segment) = GetPolygonWithPointOnSegment(new Point(e.Location.X, e.Location.Y));
+                if (polygon != null)
+                {
+                    DeleteRelation(polygon, segment);
                 }
-                    
             }
             else if(current_mode == Mode.MovePolygon)
             {
@@ -361,8 +368,11 @@ namespace PolygonEditor
         {
             current_mode = Mode.AddPerpendicularRelation;
             UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
-
-            var test = GetPointPerpendicular(new Point(2, 4), new Point(1, 2), (new Point(4, 6), new Point(6,6)));
+        }
+        private void relationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            current_mode = Mode.DeleteRelation;
+            UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
         }
 
         #endregion

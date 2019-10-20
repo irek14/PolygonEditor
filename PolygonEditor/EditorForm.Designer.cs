@@ -47,6 +47,7 @@
             this.perpendicularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTable = new System.Windows.Forms.TableLayoutPanel();
             this.Canvas = new System.Windows.Forms.PictureBox();
+            this.relationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu.SuspendLayout();
             this.MainTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
@@ -108,7 +109,7 @@
             // 
             this.vertexMoveToolStripMenuItem.CheckOnClick = true;
             this.vertexMoveToolStripMenuItem.Name = "vertexMoveToolStripMenuItem";
-            this.vertexMoveToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.vertexMoveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.vertexMoveToolStripMenuItem.Text = "Vertex move";
             this.vertexMoveToolStripMenuItem.Click += new System.EventHandler(this.vertexMoveToolStripMenuItem_Click);
             // 
@@ -116,7 +117,7 @@
             // 
             this.polygonMoveToolStripMenuItem.CheckOnClick = true;
             this.polygonMoveToolStripMenuItem.Name = "polygonMoveToolStripMenuItem";
-            this.polygonMoveToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.polygonMoveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.polygonMoveToolStripMenuItem.Text = "Polygon move";
             this.polygonMoveToolStripMenuItem.Click += new System.EventHandler(this.polygonMoveToolStripMenuItem_Click);
             // 
@@ -124,7 +125,7 @@
             // 
             this.segmentMoveToolStripMenuItem.CheckOnClick = true;
             this.segmentMoveToolStripMenuItem.Name = "segmentMoveToolStripMenuItem";
-            this.segmentMoveToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.segmentMoveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.segmentMoveToolStripMenuItem.Text = "Segment move";
             this.segmentMoveToolStripMenuItem.Click += new System.EventHandler(this.segmentMoveToolStripMenuItem_Click);
             // 
@@ -133,7 +134,8 @@
             this.deleteToolStripMenuItem.CheckOnClick = true;
             this.deleteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.polygonToolStripMenuItem,
-            this.vertexToolStripMenuItem});
+            this.vertexToolStripMenuItem,
+            this.relationToolStripMenuItem});
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.deleteToolStripMenuItem.Text = "Delete";
@@ -142,7 +144,7 @@
             // 
             this.polygonToolStripMenuItem.CheckOnClick = true;
             this.polygonToolStripMenuItem.Name = "polygonToolStripMenuItem";
-            this.polygonToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.polygonToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.polygonToolStripMenuItem.Text = "Polygon";
             this.polygonToolStripMenuItem.Click += new System.EventHandler(this.polygonToolStripMenuItem_Click);
             // 
@@ -150,7 +152,7 @@
             // 
             this.vertexToolStripMenuItem.CheckOnClick = true;
             this.vertexToolStripMenuItem.Name = "vertexToolStripMenuItem";
-            this.vertexToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.vertexToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.vertexToolStripMenuItem.Text = "Vertex";
             this.vertexToolStripMenuItem.Click += new System.EventHandler(this.vertexToolStripMenuItem_Click);
             // 
@@ -228,6 +230,13 @@
             this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
             this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
+            // relationToolStripMenuItem
+            // 
+            this.relationToolStripMenuItem.Name = "relationToolStripMenuItem";
+            this.relationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.relationToolStripMenuItem.Text = "Relation";
+            this.relationToolStripMenuItem.Click += new System.EventHandler(this.relationToolStripMenuItem_Click);
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,6 +282,7 @@
         private System.Windows.Forms.ToolStripMenuItem clearAllToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem addVertexToolStripMenuItem1;
         private System.Windows.Forms.PictureBox Canvas;
+        private System.Windows.Forms.ToolStripMenuItem relationToolStripMenuItem;
     }
 }
 

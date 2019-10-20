@@ -42,7 +42,7 @@ namespace PolygonEditor
             newPolygon = RelationPossible(tmp, index2);
             if (newPolygon == null)
             {
-                MessageBox.Show("Zjebało sie", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This operation is blocked because of the polygon relations", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 current_mode = Mode.MoveVertexStart;
                 return;
             }
