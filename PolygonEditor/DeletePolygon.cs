@@ -29,11 +29,11 @@ namespace PolygonEditor
         private void DeletePolygon(Polygon polygon)
         {
             polygons.Remove(polygon);
-            PaintAllPoints(Brushes.White, polygon);
+            //PaintAllPoints(Brushes.White, polygon);
 
             foreach(var segment in polygon.segments)
             {
-                DeleteSegment(segment);
+                //DeleteSegment(segment);
             }
         }
 

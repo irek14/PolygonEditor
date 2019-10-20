@@ -51,7 +51,7 @@ namespace PolygonEditor
             foreach(var segmentToDelete in toDelete)
             {
                 polygon.segments.Remove(segmentToDelete);
-                DeleteSegment(segmentToDelete);
+                //DeleteSegment(segmentToDelete);
                 DeleteRelation(polygon, segmentToDelete);
             }
 
@@ -64,12 +64,12 @@ namespace PolygonEditor
                 }
             }
 
-            graph.FillRectangle(Brushes.White, vertex.X - 2, vertex.Y - 2, 4, 4);
+            //graph.FillRectangle(Brushes.White, vertex.X - 2, vertex.Y - 2, 4, 4);
         }
 
         private void DeleteSegment((Point p1, Point p2) segment)
         {
-            BrenshamDrawLine(new Pen(Color.White), segment.p1, segment.p2);
+            //BrenshamDrawLine(new Pen(Color.White), segment.p1, segment.p2);
             //foreach (var pol in polygons)
             //{
             //    foreach (var s in pol.segments)

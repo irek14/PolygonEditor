@@ -17,8 +17,8 @@ namespace PolygonEditor
 
         private void MoveSegment(Point p)
         {
-            graph.FillRectangle(Brushes.White, segmentToMove.p1.X - 2, segmentToMove.p1.Y - 2, 4, 4);
-            graph.FillRectangle(Brushes.White, segmentToMove.p2.X - 2, segmentToMove.p2.Y - 2, 4, 4);
+            //graph.FillRectangle(Brushes.White, segmentToMove.p1.X - 2, segmentToMove.p1.Y - 2, 4, 4);
+            //graph.FillRectangle(Brushes.White, segmentToMove.p2.X - 2, segmentToMove.p2.Y - 2, 4, 4);
 
             int dX = start_move_point.X - p.X;
             int dY = start_move_point.Y - p.Y;

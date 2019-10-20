@@ -16,7 +16,7 @@ namespace PolygonEditor
         Point vertex_to_move;
         private void MoveVertex(Point p)
         {
-            graph.FillRectangle(Brushes.White, vertex_to_move.X - 2, vertex_to_move.Y - 2, 4, 4);
+            //graph.FillRectangle(Brushes.White, vertex_to_move.X - 2, vertex_to_move.Y - 2, 4, 4);
 
             Polygon tmp = new Polygon(current_polygon);
 
@@ -24,11 +24,11 @@ namespace PolygonEditor
 
             for (int i = 0; i < tmp.segments.Count; i++)
             {
-                if (tmp.segments[i].p1 == vertex_to_move)
-                    DeleteSegment(tmp.segments[i]);
+                //if (tmp.segments[i].p1 == vertex_to_move)
+                    //DeleteSegment(tmp.segments[i]);
 
-                if (tmp.segments[i].p2 == vertex_to_move)
-                    DeleteSegment(tmp.segments[i]);
+                //if (tmp.segments[i].p2 == vertex_to_move)
+                    //DeleteSegment(tmp.segments[i]);
             }
 
             int index = tmp.apex.IndexOf(vertex_to_move);

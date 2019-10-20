@@ -46,9 +46,10 @@
             this.sameLengthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.perpendicularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTable = new System.Windows.Forms.TableLayoutPanel();
-            this.Canvas = new System.Windows.Forms.Panel();
+            this.Canvas = new System.Windows.Forms.PictureBox();
             this.Menu.SuspendLayout();
             this.MainTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.SuspendLayout();
             // 
             // Menu
@@ -206,7 +207,7 @@
             this.MainTable.Controls.Add(this.Canvas, 0, 0);
             this.MainTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTable.Location = new System.Drawing.Point(0, 24);
-            this.MainTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MainTable.Margin = new System.Windows.Forms.Padding(2);
             this.MainTable.Name = "MainTable";
             this.MainTable.RowCount = 1;
             this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -217,11 +218,11 @@
             // 
             this.Canvas.BackColor = System.Drawing.Color.White;
             this.Canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Canvas.Location = new System.Drawing.Point(2, 2);
-            this.Canvas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Canvas.Location = new System.Drawing.Point(3, 3);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(980, 533);
+            this.Canvas.Size = new System.Drawing.Size(978, 531);
             this.Canvas.TabIndex = 0;
+            this.Canvas.TabStop = false;
             this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
             this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
             this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
@@ -239,7 +240,7 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximumSize = new System.Drawing.Size(3200, 1800);
             this.MinimumSize = new System.Drawing.Size(800, 450);
             this.Name = "EditorForm";
@@ -250,6 +251,7 @@
             this.Menu.ResumeLayout(false);
             this.Menu.PerformLayout();
             this.MainTable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,11 +271,11 @@
         private System.Windows.Forms.ToolStripMenuItem sameLengthToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem perpendicularToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel MainTable;
-        private System.Windows.Forms.Panel Canvas;
         private System.Windows.Forms.ToolStripMenuItem addVertexToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem drawToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem clearAllToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem addVertexToolStripMenuItem1;
+        private System.Windows.Forms.PictureBox Canvas;
     }
 }
 

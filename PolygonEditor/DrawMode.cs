@@ -15,7 +15,7 @@ namespace PolygonEditor
     {
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
-            graph = Canvas.CreateGraphics();
+            graph = e.Graphics;
 
             PaintAll();
         }
@@ -45,7 +45,7 @@ namespace PolygonEditor
 
             if (CheckIfStartPoint(next_point))
             {
-                BrenshamDrawLine(new Pen(Color.White), (Point)current_point, (Point)next_point);
+                //BrenshamDrawLine(new Pen(Color.White), (Point)current_point, (Point)next_point);
                 next_point = current_polygon.start_point;
             }
                 
@@ -108,13 +108,13 @@ namespace PolygonEditor
         {
             if (previous_point != null)
             {
-                BrenshamDrawLine(new Pen(Color.White), (Point)current_point, (Point)previous_point);
+                //BrenshamDrawLine(new Pen(Color.White), (Point)current_point, (Point)previous_point);
 
                 //PaintInstersectSegments((Point)current_point, (Point)previous_point);
             }
             previous_point = new Point(e.Location.X, e.Location.Y);
 
-            BrenshamDrawLine(pen, (Point)current_point, (Point)previous_point);
+            //BrenshamDrawLine(pen, (Point)current_point, (Point)previous_point);
         }
 
         private void PaintInstersectSegments(Point p1, Point p2)
@@ -123,8 +123,8 @@ namespace PolygonEditor
             {
                 foreach (var segment in polygon.segments)
                 {
-                    if (CheckSegmentIntersection(p1, p2, segment.p1, segment.p2))
-                        BrenshamDrawLine(pen, segment.p1, segment.p2);
+                    //if (CheckSegmentIntersection(p1, p2, segment.p1, segment.p2))
+                        //BrenshamDrawLine(pen, segment.p1, segment.p2);
                 }
             }
         }

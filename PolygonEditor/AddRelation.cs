@@ -29,8 +29,8 @@ namespace PolygonEditor
             {
                 first_to_relation = segment;
                 polygonToRelation = polygon;
-                graph.FillRectangle(Brushes.Red, first_to_relation.p1.X - 3, first_to_relation.p1.Y - 3, 6, 6);
-                graph.FillRectangle(Brushes.Red, first_to_relation.p2.X - 3, first_to_relation.p2.Y - 3, 6, 6);
+                //graph.FillRectangle(Brushes.Red, first_to_relation.p1.X - 3, first_to_relation.p1.Y - 3, 6, 6);
+                //graph.FillRectangle(Brushes.Red, first_to_relation.p2.X - 3, first_to_relation.p2.Y - 3, 6, 6);
                 return;
             }
 

@@ -27,6 +27,7 @@ namespace PolygonEditor
         Polygon current_polygon;
         Mode current_mode = Mode.FirstPoint;
         Graphics graph;
+        (Point, Point) current_line;
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
@@ -47,7 +48,7 @@ namespace PolygonEditor
                 //}
                 Point next_point = new Point(e.Location.X, e.Location.Y);
                 CreateSegment(next_point);
-                PaintAll();
+                //PaintAll();
             }
             else if(current_mode == Mode.DeleteVertex)
             {
@@ -55,7 +56,7 @@ namespace PolygonEditor
                 if (polygon != null)
                 {
                     DeleteVertex(polygon, vertex);
-                    PaintAll();
+                    //PaintAll();
                 }
                 polygons.RemoveAll(x => x.segments.Count == 0);
             }
@@ -65,7 +66,7 @@ namespace PolygonEditor
                 if (toDelete != null)
                 {
                     DeletePolygon(toDelete);
-                    PaintAll();
+                    //PaintAll();
                 }
                     
             }
@@ -88,10 +89,12 @@ namespace PolygonEditor
                 if (toModify != null)
                 {
                     AddVertex(toModify, segment, newPoint);
-                    PaintAll();
+                    //PaintAll();
                 }                
             }
+            Canvas.Invalidate();
         }
+
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
@@ -166,14 +169,16 @@ namespace PolygonEditor
             if (current_mode == Mode.Draw && e.Button == MouseButtons.Left)
             {                
                 CreateLine(e);
-                PaintAll();
+                current_line = ((Point)current_point, (Point)previous_point);
+                Canvas.Invalidate();
+                //PaintAll();
             }
 
             if(current_mode == Mode.MovePolygon)
             {
-                PaintGraphics(current_polygon, true);
+                //PaintGraphics(current_polygon, true);
                 MovePolygon(new Point(e.Location.X, e.Location.Y));
-                PaintAll();
+                //PaintAll();
             }
 
             if(current_mode == Mode.MoveVertex)
@@ -189,6 +194,7 @@ namespace PolygonEditor
                 //PaintAll();
             }
 
+            Canvas.Invalidate();
         }
 
         private void PaintAllPoints(Brush brush, Polygon polygon)
@@ -366,6 +372,8 @@ namespace PolygonEditor
 
         private void PaintAll()
         {
+            if(current_point != null)
+                BrenshamDrawLine(pen, current_line.Item1, current_line.Item2);
             foreach (Polygon polygon in polygons)
             {
                 PaintGraphics(polygon);
@@ -374,5 +382,6 @@ namespace PolygonEditor
                     BrenshamDrawLine(pen, segment.p1, segment.p2);
             }
         }
+
     }
 }

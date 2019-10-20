@@ -26,10 +26,10 @@ namespace PolygonEditor
             List<(Point, Point)> newSegments = new List<(Point, Point)>();
 
             polygons.Remove(current_polygon);
-            PaintAllPoints(Brushes.White, current_polygon);
+            //PaintAllPoints(Brushes.White, current_polygon);
             foreach (var segment in current_polygon.segments)
             {
-                DeleteSegment(segment);
+                //DeleteSegment(segment);
                 (Point, Point) newSegment = (new Point(segment.p1.X - dX, segment.p1.Y - dY), new Point(segment.p2.X - dX, segment.p2.Y - dY));
                 newSegments.Add(newSegment);
             }
