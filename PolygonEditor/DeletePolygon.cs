@@ -29,12 +29,6 @@ namespace PolygonEditor
         private void DeletePolygon(Polygon polygon)
         {
             polygons.Remove(polygon);
-            //PaintAllPoints(Brushes.White, polygon);
-
-            foreach(var segment in polygon.segments)
-            {
-                //DeleteSegment(segment);
-            }
         }
 
         private double GetDistanceFromLine((Point a, Point b) segment, Point p)

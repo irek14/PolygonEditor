@@ -20,6 +20,7 @@ namespace PolygonEditor
             InitializeComponent();
         }
 
+        bool drawCurrentLine = false;
         Pen pen = new Pen(Color.Black);
         Point? current_point = null;
         Point? previous_point = null;
@@ -40,15 +41,9 @@ namespace PolygonEditor
             }
             else if(current_mode == Mode.Draw)
             {
-                //if (previous_point != null)
-                //{
-                //    BrenshamDrawLine(new Pen(Color.White), (Point)current_point, (Point)previous_point);
-
-                //    PaintInstersectSegments((Point)current_point, (Point)previous_point);
-                //}
                 Point next_point = new Point(e.Location.X, e.Location.Y);
                 CreateSegment(next_point);
-                //PaintAll();
+                drawCurrentLine = false;
             }
             else if(current_mode == Mode.DeleteVertex)
             {
@@ -56,7 +51,6 @@ namespace PolygonEditor
                 if (polygon != null)
                 {
                     DeleteVertex(polygon, vertex);
-                    //PaintAll();
                 }
                 polygons.RemoveAll(x => x.segments.Count == 0);
             }
@@ -66,7 +60,6 @@ namespace PolygonEditor
                 if (toDelete != null)
                 {
                     DeletePolygon(toDelete);
-                    //PaintAll();
                 }
                     
             }
@@ -89,9 +82,9 @@ namespace PolygonEditor
                 if (toModify != null)
                 {
                     AddVertex(toModify, segment, newPoint);
-                    //PaintAll();
                 }                
             }
+
             Canvas.Invalidate();
         }
 
@@ -170,15 +163,13 @@ namespace PolygonEditor
             {                
                 CreateLine(e);
                 current_line = ((Point)current_point, (Point)previous_point);
+                drawCurrentLine = true;
                 Canvas.Invalidate();
-                //PaintAll();
             }
 
             if(current_mode == Mode.MovePolygon)
             {
-                //PaintGraphics(current_polygon, true);
                 MovePolygon(new Point(e.Location.X, e.Location.Y));
-                //PaintAll();
             }
 
             if(current_mode == Mode.MoveVertex)
@@ -191,7 +182,6 @@ namespace PolygonEditor
             {
                 MoveSegment(new Point(e.Location.X, e.Location.Y));
                 Canvas.Invalidate();
-                //PaintAll();
             }
 
             Canvas.Invalidate();
@@ -222,33 +212,59 @@ namespace PolygonEditor
             return true;
         }
 
-        private bool CheckSegmentIntersection(Point p1, Point p2, Point p3, Point p4)
+        private void PaintGraphics(Polygon polygon, bool white = false)
         {
-            int d1 = (p4.X - p3.X) * (p1.Y - p3.Y) - (p1.X - p3.X) * (p4.Y - p3.Y);
-            int d2 = (p4.X - p3.X) * (p2.Y - p3.Y) - (p2.X - p3.X) * (p4.Y - p3.Y);
-            int d3 = (p2.X - p1.X) * (p3.Y - p1.Y) - (p3.X - p1.X) * (p2.Y - p1.Y);
-            int d4 = (p2.X - p1.X) * (p4.Y - p1.Y) - (p4.X - p1.X) * (p2.Y - p1.Y);
+            //TODO: relation icons
+            Random rnd = new Random();
 
-            int d12 = d1 * d2;
-            int d34 = d3 * d4;
+            foreach (var relation in polygon.relations)
+            {
+                Brush result = Brushes.Transparent;
 
-            if (d12 > 0 || d34 > 0) return false;
+                Type brushesType = typeof(Brushes);
 
-            if (d12 < 0 || d34 < 0) return true;
+                PropertyInfo[] properties = brushesType.GetProperties();
 
-            return OnRectangle(p1,p3,p4) || OnRectangle(p2,p3,p4) || OnRectangle(p3,p1,p2) || OnRectangle(p4,p1,p2);
+                int random = rnd.Next(properties.Length);
+                result = (Brush)properties[random].GetValue(null, null);
+
+                if (white)
+                    result = Brushes.White;
+
+                float x1 = Math.Max(relation.first_segment.p1.X, relation.first_segment.p2.X) - Math.Abs((relation.first_segment.p1.X - relation.first_segment.p2.X)) / 2;
+                float y1 = Math.Max(relation.first_segment.p1.Y, relation.first_segment.p2.Y) - Math.Abs((relation.first_segment.p1.Y - relation.first_segment.p2.Y)) / 2;
+                float x2 = Math.Max(relation.second_segment.p1.X, relation.second_segment.p2.X) - Math.Abs((relation.second_segment.p1.X - relation.second_segment.p2.X)) / 2;
+                float y2 = Math.Max(relation.second_segment.p1.Y, relation.second_segment.p2.Y) - Math.Abs((relation.second_segment.p1.Y - relation.second_segment.p2.Y)) / 2;
+
+                try
+                {
+                    graph.FillEllipse(result, x1, y1, 10, 10);
+                    graph.FillEllipse(result, x2, y2, 10, 10);
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
         }
 
-        private bool OnRectangle(Point q, Point p1, Point p2)
+        private void PaintAll()
         {
-            return Math.Min(p1.X, p2.X) <= q.X && q.X <= Math.Max(p1.X, p2.X) && Math.Min(p1.Y, p2.Y) <= q.Y && q.Y <= Math.Max(p1.Y, p2.Y);
-        }
+            if (drawCurrentLine)
+                BrenshamDrawLine(pen, current_line.Item1, current_line.Item2);
+            foreach (Polygon polygon in polygons)
+            {
+                PaintGraphics(polygon);
+                PaintAllPoints(Brushes.Black, polygon);
+                foreach (var segment in polygon.segments)
+                    BrenshamDrawLine(pen, segment.p1, segment.p2);
+            }
 
-        private void ClearAllButton_Click(object sender, EventArgs e)
-        {
-            polygons.Clear();
-            ResetVariables();
-            Canvas.Invalidate();
+            if (first_to_relation.p1.X != -1)
+            {
+                graph.FillRectangle(Brushes.Red, first_to_relation.p1.X - 3, first_to_relation.p1.Y - 3, 6, 6);
+                graph.FillRectangle(Brushes.Red, first_to_relation.p2.X - 3, first_to_relation.p2.Y - 3, 6, 6);
+            }
         }
 
         private void ResetVariables()
@@ -256,7 +272,21 @@ namespace PolygonEditor
             current_point = null;
             previous_point = null;
             current_mode = Mode.FirstPoint;
+
+            foreach (ToolStripMenuItem menu_item in Menu.Items)
+            {
+                foreach (ToolStripMenuItem item in menu_item.DropDown.Items)
+                {
+                    if (item.Text == "Draw")
+                        item.Checked = true;
+                    else
+                        item.Checked = false;
+
+                }
+            }
         }
+
+        #region MenuButtons
 
         private void vertexMoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -309,7 +339,6 @@ namespace PolygonEditor
 
         public void UncheckOtherToolStripMenuItems(ToolStripMenuItem selectedMenuItem)
         {
-
             foreach(ToolStripMenuItem menu_item in Menu.Items)
             {
                 foreach(ToolStripMenuItem item in menu_item.DropDown.Items)
@@ -335,53 +364,7 @@ namespace PolygonEditor
             var test = GetPointPerpendicular(new Point(2, 4), new Point(1, 2), (new Point(4, 6), new Point(6,6)));
         }
 
-        private void PaintGraphics(Polygon polygon, bool white = false)
-        {
-            Random rnd = new Random();
-
-            foreach (var relation in polygon.relations)
-            {
-                Brush result = Brushes.Transparent;
-
-                Type brushesType = typeof(Brushes);
-
-                PropertyInfo[] properties = brushesType.GetProperties();
-
-                int random = rnd.Next(properties.Length);
-                result = (Brush)properties[random].GetValue(null, null);
-
-                if (white)
-                    result = Brushes.White;
-
-                float x1 = Math.Max(relation.first_segment.p1.X, relation.first_segment.p2.X) - Math.Abs((relation.first_segment.p1.X - relation.first_segment.p2.X)) / 2;
-                float y1 = Math.Max(relation.first_segment.p1.Y, relation.first_segment.p2.Y) - Math.Abs((relation.first_segment.p1.Y - relation.first_segment.p2.Y)) / 2;
-                float x2 = Math.Max(relation.second_segment.p1.X, relation.second_segment.p2.X) - Math.Abs((relation.second_segment.p1.X - relation.second_segment.p2.X)) / 2;
-                float y2 = Math.Max(relation.second_segment.p1.Y, relation.second_segment.p2.Y) - Math.Abs((relation.second_segment.p1.Y - relation.second_segment.p2.Y)) / 2;
-
-                try
-                {
-                    graph.FillEllipse(result, x1, y1, 10, 10);
-                    graph.FillEllipse(result, x2, y2, 10, 10);
-                }
-                catch(Exception e)
-                {
-
-                }
-            }
-        }
-
-        private void PaintAll()
-        {
-            if(current_point != null)
-                BrenshamDrawLine(pen, current_line.Item1, current_line.Item2);
-            foreach (Polygon polygon in polygons)
-            {
-                PaintGraphics(polygon);
-                PaintAllPoints(Brushes.Black, polygon);
-                foreach (var segment in polygon.segments)
-                    BrenshamDrawLine(pen, segment.p1, segment.p2);
-            }
-        }
+        #endregion
 
     }
 }

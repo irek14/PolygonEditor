@@ -29,8 +29,6 @@ namespace PolygonEditor
             {
                 first_to_relation = segment;
                 polygonToRelation = polygon;
-                //graph.FillRectangle(Brushes.Red, first_to_relation.p1.X - 3, first_to_relation.p1.Y - 3, 6, 6);
-                //graph.FillRectangle(Brushes.Red, first_to_relation.p2.X - 3, first_to_relation.p2.Y - 3, 6, 6);
                 return;
             }
 
@@ -69,7 +67,7 @@ namespace PolygonEditor
             }
             else
             {
-                MessageBox.Show("Zjebało sie", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This relation isn't possible - maybe try put the same edges with diffrent oder", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Canvas.Invalidate();
             }
 
@@ -210,9 +208,6 @@ namespace PolygonEditor
                 else
                     newPoint = GetPointPerpendicular(first_segment.Item2, first_segment.Item1, second_segment);
 
-                //BrenshamDrawLine(new Pen(Color.White), first_segment.Item1, first_segment.Item2);
-                //BrenshamDrawLine(new Pen(Color.Red), first_segment.Item1, newPoint);
-
                 CorrectPolygonAfterRelation(ref polygon, first_segment.Item1, newPoint);
 
                 i--;
@@ -247,9 +242,6 @@ namespace PolygonEditor
                     newPoint = GetPointSameLength(first_segment.Item2, first_segment.Item1, second_segment);
                 else
                     newPoint = GetPointPerpendicular(first_segment.Item2, first_segment.Item1, second_segment);
-
-                //BrenshamDrawLine(new Pen(Color.White), first_segment.Item1, first_segment.Item2);
-                //BrenshamDrawLine(new Pen(Color.Red), first_segment.Item1, newPoint);
 
                 CorrectPolygonAfterRelation(ref polygon, first_segment.Item1, newPoint);
                 i++;

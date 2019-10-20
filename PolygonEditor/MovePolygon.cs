@@ -26,10 +26,8 @@ namespace PolygonEditor
             List<(Point, Point)> newSegments = new List<(Point, Point)>();
 
             polygons.Remove(current_polygon);
-            //PaintAllPoints(Brushes.White, current_polygon);
             foreach (var segment in current_polygon.segments)
             {
-                //DeleteSegment(segment);
                 (Point, Point) newSegment = (new Point(segment.p1.X - dX, segment.p1.Y - dY), new Point(segment.p2.X - dX, segment.p2.Y - dY));
                 newSegments.Add(newSegment);
             }
@@ -43,11 +41,6 @@ namespace PolygonEditor
             current_polygon.relations = GetRelationAfterMovePolygon(current_polygon.relations, current_polygon.segments, newSegments);
             current_polygon.segments = newSegments;
             current_polygon.apex = newApex;
-
-            //foreach(var segment in current_polygon.segments)
-            //{
-            //    BrenshamDrawLine(pen, segment.p1, segment.p2);
-            //}
 
             polygons.Add(current_polygon);
         }

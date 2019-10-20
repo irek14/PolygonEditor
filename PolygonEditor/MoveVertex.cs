@@ -16,20 +16,9 @@ namespace PolygonEditor
         Point vertex_to_move;
         private void MoveVertex(Point p)
         {
-            //graph.FillRectangle(Brushes.White, vertex_to_move.X - 2, vertex_to_move.Y - 2, 4, 4);
-
             Polygon tmp = new Polygon(current_polygon);
 
             List<(Point, Point)> toDelete = new List<(Point, Point)>();
-
-            for (int i = 0; i < tmp.segments.Count; i++)
-            {
-                //if (tmp.segments[i].p1 == vertex_to_move)
-                    //DeleteSegment(tmp.segments[i]);
-
-                //if (tmp.segments[i].p2 == vertex_to_move)
-                    //DeleteSegment(tmp.segments[i]);
-            }
 
             int index = tmp.apex.IndexOf(vertex_to_move);
             CorrectPolygonAfterRelation(ref tmp, vertex_to_move, p);
@@ -38,7 +27,7 @@ namespace PolygonEditor
 
             if(newPolygon == null)
             {
-                MessageBox.Show("Zjebało sie", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This operation is blocked because of the polygon relations", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 current_mode = Mode.MoveVertexStart;
             }
             else

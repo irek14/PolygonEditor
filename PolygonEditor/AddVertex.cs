@@ -29,9 +29,6 @@ namespace PolygonEditor
                     (Point, Point) newSegment2 = (newPoint, polygon.segments[i].p2);
                     newSegments.Add(newSegment1);
                     newSegments.Add(newSegment2);
-                    //DeleteSegment(polygon.segments[i]);
-                    //BrenshamDrawLine(pen, newSegment1.Item1, newSegment1.Item2);
-                    //BrenshamDrawLine(pen, newSegment2.Item1, newSegment2.Item2);
 
                     newApex.Add(polygon.segments[i].p1);
                     newApex.Add(newPoint);
