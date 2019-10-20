@@ -352,8 +352,15 @@ namespace PolygonEditor
                 float x2 = Math.Max(relation.second_segment.p1.X, relation.second_segment.p2.X) - Math.Abs((relation.second_segment.p1.X - relation.second_segment.p2.X)) / 2;
                 float y2 = Math.Max(relation.second_segment.p1.Y, relation.second_segment.p2.Y) - Math.Abs((relation.second_segment.p1.Y - relation.second_segment.p2.Y)) / 2;
 
-                graph.FillEllipse(result, x1, y1, 10, 10);
-                graph.FillEllipse(result, x2, y2, 10, 10);
+                try
+                {
+                    graph.FillEllipse(result, x1, y1, 10, 10);
+                    graph.FillEllipse(result, x2, y2, 10, 10);
+                }
+                catch(Exception e)
+                {
+
+                }
             }
         }
 

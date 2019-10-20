@@ -34,7 +34,11 @@ namespace PolygonEditor
             start_point = p.start_point;
             apex = new List<Point>(p.apex);
             segments = new List<(Point, Point)>(p.segments);
-            relations = new List<Relation>(p.relations);
+            relations = new List<Relation>();
+            foreach(Relation relation in p.relations)
+            {
+                relations.Add(new Relation(relation.type, relation.first_segment, relation.second_segment));
+            }
         }
     }
 }

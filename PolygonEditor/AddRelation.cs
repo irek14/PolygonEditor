@@ -66,6 +66,7 @@ namespace PolygonEditor
             else
             {
                 MessageBox.Show("Zjebało sie", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Canvas.Invalidate();
             }
 
             first_to_relation = (new Point(-1, -1), new Point(-1, -1));
@@ -141,11 +142,33 @@ namespace PolygonEditor
                 result = new Point(p.X, previous_point.Y);
             }
             else
-                straightA = (-1) * perpendicularStraightA;
+                straightA = (-1) / perpendicularStraightA;
 
             double straightB = p.Y - straightA * p.X;
+            double length = Math.Sqrt((p.X - previous_point.X) * (p.X - previous_point.X) + (p.Y - previous_point.Y) * (p.Y - previous_point.Y));
 
-            result = new Point(previous_point.X, (int)(straightA * previous_point.X + straightB));
+            double a = 1 + straightA * straightA;
+            double b = 2 * straightA * straightB - 2 * p.X - 2 * straightA * p.Y;
+            double c = p.X * p.X + p.Y * p.Y + straightB * straightB - 2 * p.Y * straightB - length * length;
+
+            double d = b * b - 4 * a * c;
+            double x1, x2;
+
+            if (d == 0)
+            {
+                x1 = Math.Ceiling(-b / (2.0 * a));
+                x2 = x1;
+            }
+            else
+            {
+                x1 = Math.Ceiling((-b + Math.Sqrt(d)) / (2 * a));
+                x2 = Math.Ceiling((-b - Math.Sqrt(d)) / (2 * a));
+            }
+
+            double newX = Math.Abs(previous_point.X - x1) < Math.Abs(previous_point.X - x2) ? x1 : x2;
+            double newY = straightA * newX + straightB;
+
+            result = new Point((int)newX, (int)newY);
 
             return result;
         }
@@ -175,8 +198,13 @@ namespace PolygonEditor
 
                 (Point, Point) first_segment = relation.first_segment;
                 (Point, Point) second_segment = relation.second_segment;
+                Point newPoint;
 
-                Point newPoint = GetPointSameLength(first_segment.Item2, first_segment.Item1, second_segment);
+
+                if(relation.type == RelationTypes.SameLength)
+                    newPoint = GetPointSameLength(first_segment.Item2, first_segment.Item1, second_segment);
+                else
+                    newPoint = GetPointPerpendicular(first_segment.Item2, first_segment.Item1, second_segment);
 
                 //BrenshamDrawLine(new Pen(Color.White), first_segment.Item1, first_segment.Item2);
                 //BrenshamDrawLine(new Pen(Color.Red), first_segment.Item1, newPoint);
@@ -209,8 +237,12 @@ namespace PolygonEditor
 
                 (Point, Point) first_segment = relation.first_segment;
                 (Point, Point) second_segment = relation.second_segment;
+                Point newPoint;
 
-                Point newPoint = GetPointSameLength(first_segment.Item2, first_segment.Item1, second_segment);
+                if (relation.type == RelationTypes.SameLength)
+                    newPoint = GetPointSameLength(first_segment.Item2, first_segment.Item1, second_segment);
+                else
+                    newPoint = GetPointPerpendicular(first_segment.Item2, first_segment.Item1, second_segment);
 
                 //BrenshamDrawLine(new Pen(Color.White), first_segment.Item1, first_segment.Item2);
                 //BrenshamDrawLine(new Pen(Color.Red), first_segment.Item1, newPoint);
@@ -260,13 +292,28 @@ namespace PolygonEditor
 
         private bool CheckAllRelation(Polygon polygon)
         {
-            foreach(var relation in polygon.relations)
+            foreach (var relation in polygon.relations)
             {
-                double length1 = GetSegmentLenght(relation.first_segment.p1, relation.first_segment.p2);
-                double length2 = GetSegmentLenght(relation.second_segment.p1, relation.second_segment.p2);
+                if (relation.type == RelationTypes.SameLength)
+                {
+                    double length1 = GetSegmentLenght(relation.first_segment.p1, relation.first_segment.p2);
+                    double length2 = GetSegmentLenght(relation.second_segment.p1, relation.second_segment.p2);
 
-                if (Math.Abs(length1 - length2) > 50)
-                    return false;
+                    if (Math.Abs(length1 - length2) > 5)
+                        return false;
+                }
+                else
+                {
+                    double straightA = ((double)(relation.first_segment.p1.Y - relation.first_segment.p2.Y)) / ((double)(relation.first_segment.p1.X - relation.first_segment.p2.X));
+                    double perpendicularStraightA = ((double)(relation.second_segment.p1.Y - relation.second_segment.p2.Y)) / ((double)(relation.second_segment.p1.X - relation.second_segment.p2.X));
+
+                    if (double.IsInfinity(straightA) && perpendicularStraightA != 0)
+                        return false;
+                    if (double.IsInfinity(perpendicularStraightA) && straightA != 0)
+                        return false;
+                    if (perpendicularStraightA * straightA > -0.8 || perpendicularStraightA * straightA < -1.2)
+                        return false;
+                }
             }
             return true;
         }
