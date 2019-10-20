@@ -62,7 +62,8 @@
             this.addRelationToolStripMenuItem});
             this.Menu.Location = new System.Drawing.Point(0, 0);
             this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(1582, 28);
+            this.Menu.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.Menu.Size = new System.Drawing.Size(984, 24);
             this.Menu.TabIndex = 1;
             this.Menu.Text = "menuStrip1";
             // 
@@ -72,7 +73,7 @@
             this.drawToolStripMenuItem1,
             this.clearAllToolStripMenuItem1});
             this.drawToolStripMenuItem.Name = "drawToolStripMenuItem";
-            this.drawToolStripMenuItem.Size = new System.Drawing.Size(54, 24);
+            this.drawToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.drawToolStripMenuItem.Text = "Main";
             // 
             // drawToolStripMenuItem1
@@ -81,14 +82,14 @@
             this.drawToolStripMenuItem1.CheckOnClick = true;
             this.drawToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.drawToolStripMenuItem1.Name = "drawToolStripMenuItem1";
-            this.drawToolStripMenuItem1.Size = new System.Drawing.Size(138, 26);
+            this.drawToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.drawToolStripMenuItem1.Text = "Draw";
             this.drawToolStripMenuItem1.Click += new System.EventHandler(this.drawToolStripMenuItem1_Click);
             // 
             // clearAllToolStripMenuItem1
             // 
             this.clearAllToolStripMenuItem1.Name = "clearAllToolStripMenuItem1";
-            this.clearAllToolStripMenuItem1.Size = new System.Drawing.Size(138, 26);
+            this.clearAllToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.clearAllToolStripMenuItem1.Text = "Clear all";
             this.clearAllToolStripMenuItem1.Click += new System.EventHandler(this.clearAllToolStripMenuItem1_Click);
             // 
@@ -99,14 +100,14 @@
             this.polygonMoveToolStripMenuItem,
             this.segmentMoveToolStripMenuItem});
             this.moveToolStripMenuItem2.Name = "moveToolStripMenuItem2";
-            this.moveToolStripMenuItem2.Size = new System.Drawing.Size(58, 24);
+            this.moveToolStripMenuItem2.Size = new System.Drawing.Size(49, 20);
             this.moveToolStripMenuItem2.Text = "Move";
             // 
             // vertexMoveToolStripMenuItem
             // 
             this.vertexMoveToolStripMenuItem.CheckOnClick = true;
             this.vertexMoveToolStripMenuItem.Name = "vertexMoveToolStripMenuItem";
-            this.vertexMoveToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.vertexMoveToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.vertexMoveToolStripMenuItem.Text = "Vertex move";
             this.vertexMoveToolStripMenuItem.Click += new System.EventHandler(this.vertexMoveToolStripMenuItem_Click);
             // 
@@ -114,7 +115,7 @@
             // 
             this.polygonMoveToolStripMenuItem.CheckOnClick = true;
             this.polygonMoveToolStripMenuItem.Name = "polygonMoveToolStripMenuItem";
-            this.polygonMoveToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.polygonMoveToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.polygonMoveToolStripMenuItem.Text = "Polygon move";
             this.polygonMoveToolStripMenuItem.Click += new System.EventHandler(this.polygonMoveToolStripMenuItem_Click);
             // 
@@ -122,7 +123,7 @@
             // 
             this.segmentMoveToolStripMenuItem.CheckOnClick = true;
             this.segmentMoveToolStripMenuItem.Name = "segmentMoveToolStripMenuItem";
-            this.segmentMoveToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.segmentMoveToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.segmentMoveToolStripMenuItem.Text = "Segment move";
             this.segmentMoveToolStripMenuItem.Click += new System.EventHandler(this.segmentMoveToolStripMenuItem_Click);
             // 
@@ -133,14 +134,14 @@
             this.polygonToolStripMenuItem,
             this.vertexToolStripMenuItem});
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.deleteToolStripMenuItem.Text = "Delete";
             // 
             // polygonToolStripMenuItem
             // 
             this.polygonToolStripMenuItem.CheckOnClick = true;
             this.polygonToolStripMenuItem.Name = "polygonToolStripMenuItem";
-            this.polygonToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.polygonToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.polygonToolStripMenuItem.Text = "Polygon";
             this.polygonToolStripMenuItem.Click += new System.EventHandler(this.polygonToolStripMenuItem_Click);
             // 
@@ -148,7 +149,7 @@
             // 
             this.vertexToolStripMenuItem.CheckOnClick = true;
             this.vertexToolStripMenuItem.Name = "vertexToolStripMenuItem";
-            this.vertexToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.vertexToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.vertexToolStripMenuItem.Text = "Vertex";
             this.vertexToolStripMenuItem.Click += new System.EventHandler(this.vertexToolStripMenuItem_Click);
             // 
@@ -160,14 +161,14 @@
             this.addVertexToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addVertexToolStripMenuItem1});
             this.addVertexToolStripMenuItem.Name = "addVertexToolStripMenuItem";
-            this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.addVertexToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.addVertexToolStripMenuItem.Text = "Add";
             // 
             // addVertexToolStripMenuItem1
             // 
             this.addVertexToolStripMenuItem1.CheckOnClick = true;
             this.addVertexToolStripMenuItem1.Name = "addVertexToolStripMenuItem1";
-            this.addVertexToolStripMenuItem1.Size = new System.Drawing.Size(156, 26);
+            this.addVertexToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
             this.addVertexToolStripMenuItem1.Text = "Add vertex";
             this.addVertexToolStripMenuItem1.Click += new System.EventHandler(this.addVertexToolStripMenuItem1_Click);
             // 
@@ -178,14 +179,14 @@
             this.sameLengthToolStripMenuItem,
             this.perpendicularToolStripMenuItem});
             this.addRelationToolStripMenuItem.Name = "addRelationToolStripMenuItem";
-            this.addRelationToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
+            this.addRelationToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.addRelationToolStripMenuItem.Text = "Add relation";
             // 
             // sameLengthToolStripMenuItem
             // 
             this.sameLengthToolStripMenuItem.CheckOnClick = true;
             this.sameLengthToolStripMenuItem.Name = "sameLengthToolStripMenuItem";
-            this.sameLengthToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.sameLengthToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.sameLengthToolStripMenuItem.Text = "Same length";
             this.sameLengthToolStripMenuItem.Click += new System.EventHandler(this.sameLengthToolStripMenuItem_Click);
             // 
@@ -193,7 +194,7 @@
             // 
             this.perpendicularToolStripMenuItem.CheckOnClick = true;
             this.perpendicularToolStripMenuItem.Name = "perpendicularToolStripMenuItem";
-            this.perpendicularToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.perpendicularToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.perpendicularToolStripMenuItem.Text = "Perpendicular";
             this.perpendicularToolStripMenuItem.Click += new System.EventHandler(this.perpendicularToolStripMenuItem_Click);
             // 
@@ -201,23 +202,25 @@
             // 
             this.MainTable.ColumnCount = 1;
             this.MainTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.MainTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.MainTable.Controls.Add(this.Canvas, 0, 0);
             this.MainTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainTable.Location = new System.Drawing.Point(0, 28);
+            this.MainTable.Location = new System.Drawing.Point(0, 24);
+            this.MainTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MainTable.Name = "MainTable";
             this.MainTable.RowCount = 1;
             this.MainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTable.Size = new System.Drawing.Size(1582, 825);
+            this.MainTable.Size = new System.Drawing.Size(984, 537);
             this.MainTable.TabIndex = 0;
             // 
             // Canvas
             // 
             this.Canvas.BackColor = System.Drawing.Color.White;
             this.Canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Canvas.Location = new System.Drawing.Point(3, 3);
+            this.Canvas.Location = new System.Drawing.Point(2, 2);
+            this.Canvas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(1576, 819);
+            this.Canvas.Size = new System.Drawing.Size(980, 533);
             this.Canvas.TabIndex = 0;
             this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
             this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
@@ -226,20 +229,24 @@
             // 
             // EditorForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.GrayText;
-            this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.MainTable);
             this.Controls.Add(this.Menu);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(1600, 900);
-            this.MinimumSize = new System.Drawing.Size(1600, 900);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximumSize = new System.Drawing.Size(3200, 1800);
+            this.MinimumSize = new System.Drawing.Size(800, 450);
             this.Name = "EditorForm";
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Polygon editor";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Menu.ResumeLayout(false);
             this.Menu.PerformLayout();
             this.MainTable.ResumeLayout(false);

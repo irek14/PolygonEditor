@@ -21,6 +21,7 @@ namespace PolygonEditor
             if (polygon.relations.Any(x => (x.first_segment.p1 == segment.p1 && x.first_segment.p2 == segment.p2) || (x.second_segment.p1 == segment.p1 && x.second_segment.p2 == segment.p2)))
             {
                 MessageBox.Show("This segment already has a relation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Canvas.Invalidate();
                 return;
             }
 
@@ -28,6 +29,8 @@ namespace PolygonEditor
             {
                 first_to_relation = segment;
                 polygonToRelation = polygon;
+                graph.FillRectangle(Brushes.Red, first_to_relation.p1.X - 3, first_to_relation.p1.Y - 3, 6, 6);
+                graph.FillRectangle(Brushes.Red, first_to_relation.p2.X - 3, first_to_relation.p2.Y - 3, 6, 6);
                 return;
             }
 
@@ -36,6 +39,7 @@ namespace PolygonEditor
                 MessageBox.Show("You cannot assign relation between two diffrent polygons", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 first_to_relation = (new Point(-1, -1), new Point(-1, -1));
                 polygonToRelation = null;
+                Canvas.Invalidate();
                 return;
             }
 
@@ -44,6 +48,7 @@ namespace PolygonEditor
                 MessageBox.Show("You cannot assign relation between the same segment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 first_to_relation = (new Point(-1, -1), new Point(-1, -1));
                 polygonToRelation = null;
+                Canvas.Invalidate();
                 return;
             }
 
@@ -60,7 +65,6 @@ namespace PolygonEditor
             {
                 polygons.Remove(polygon);
                 polygons.Add(newPolygon);
-                MessageBox.Show("Relation complete", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Canvas.Invalidate();
             }
             else
