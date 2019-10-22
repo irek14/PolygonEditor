@@ -20,23 +20,80 @@ namespace PolygonEditor
             PaintAll();
         }
 
-        private void BrenshamDrawLine(Pen pen, Point p1, Point p2)
+        private void BresenhamDrawLine(Pen pen, Point p1, Point p2)
         {
-            //TODO: Brensham algorithm
+            //graph.DrawLine(pen, p1, p2); //FOR TEST
 
-            graph.DrawLine(pen, p1, p2);
+            int d, dx, dy, incre, incre2, increX, increY;
+            int x1 = p1.X, x2 = p2.X, y1 = p1.Y, y2 = p2.Y;
 
-            //int dx = Math.Abs(p2.X - p1.X), sx = p1.X < p2.X ? 1 : -1;
-            //int dy = Math.Abs(p2.Y - p1.Y), sy = p1.Y < p2.Y ? 1 : -1;
-            //int err = (dx > dy ? dx : -dy) / 2, e2;
-            //for (; ; )
-            //{
-            //    graph.FillRectangle(pen.Brush, p1.X, p1.Y, 1, 1);
-            //    if (p1.X == p2.X && p1.Y == p2.Y) break;
-            //    e2 = err;
-            //    if (e2 > -dx) { err -= dy; p1.X += sx; }
-            //    if (e2 < dy) { err += dx; p1.Y += sy; }
-            //}
+            if (x1 < x2)
+            {
+                increX = 1;
+                dx = x2 - x1;
+            }
+            else
+            {
+                increX = -1;
+                dx = x1 - x2;
+            }
+
+            if(y1<y2)
+            {
+                increY = 1;
+                dy = y2 - y1;
+            }
+            else
+            {
+                increY = -1;
+                dy = y1 - y2;
+            }
+
+            graph.FillRectangle(pen.Brush, x1,y1, 1, 1);
+
+            if (dx > dy) //OX
+            {
+                incre = (dy - dx) * 2;
+                incre2 = dy * 2;
+                d = incre2 - dx;
+
+                while(x1 != x2)
+                {
+                    if(d>=0)
+                    {
+                        x1 += increX;
+                        y1 += increY;
+                        d += incre;
+                    }
+                    else
+                    {
+                        d += incre2;
+                        x1 += increX;
+                    }
+                    graph.FillRectangle(pen.Brush, x1, y1, 1, 1);
+                }
+            }
+            else //OY
+            {
+                incre = (dx - dy) * 2;
+                incre2 = dx * 2;
+                d = incre2 - dy;
+                while(y1 != y2)
+                {
+                    if(d>=0)
+                    {
+                        x1 += increX;
+                        y1 += increY;
+                        d += incre;
+                    }
+                    else
+                    {
+                        y1 += increY;
+                        d += incre2;
+                    }
+                    graph.FillRectangle(pen.Brush, x1, y1, 1, 1);
+                }
+            }
         }
 
         private void CreateSegment(Point next_point)

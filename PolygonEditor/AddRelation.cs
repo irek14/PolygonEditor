@@ -79,10 +79,7 @@ namespace PolygonEditor
 
         private void DeleteRelation(Polygon polygon, (Point p1, Point p2) segment)
         {
-            var result = polygon.relations.RemoveAll(x => (x.first_segment.p1 == segment.p1 && x.first_segment.p2 == segment.p2) || (x.second_segment.p1 == segment.p1 && x.second_segment.p2 == segment.p2));
-
-            if (result != 0)
-                MessageBox.Show($"Relation was deleted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            polygon.relations.RemoveAll(x => (x.first_segment.p1 == segment.p1 && x.first_segment.p2 == segment.p2) || (x.second_segment.p1 == segment.p1 && x.second_segment.p2 == segment.p2));
         }
 
         private Point GetPointSameLength(Point p, Point previous_point, (Point p1, Point p2) segment)
@@ -180,21 +177,17 @@ namespace PolygonEditor
             int i = index-1;
             while(true)
             {
-                if(i==-1)
+                if (CheckAllRelation(polygon))
+                    return polygon;
+
+                if (i==-1)
                     i = polygon.segments.Count - 1;
 
                 if (i == index)
-                {
-                    if (CheckAllRelation(polygon))
-                        return polygon;
-
                     return null;
-                }
 
                 if (!polygon.relations.Any(x => (x.first_segment.p1 == polygon.segments[i].p1 && x.first_segment.p2 == polygon.segments[i].p2)))
-                {
                     break;
-                }
 
                 Relation relation = polygon.relations.First(x => (x.first_segment.p1 == polygon.segments[i].p1 && x.first_segment.p2 == polygon.segments[i].p2));
 
@@ -216,21 +209,17 @@ namespace PolygonEditor
             i = index;
             while (true)
             {
+                if (CheckAllRelation(polygon))
+                    return polygon;
+
                 if (i == polygon.segments.Count)
                     i = 0;
 
                 if (i == index-1)
-                {
-                    if (CheckAllRelation(polygon))
-                        return polygon;
-
                     return null;
-                }
 
                 if (!polygon.relations.Any(x => (x.first_segment.p1 == polygon.segments[i].p1 && x.first_segment.p2 == polygon.segments[i].p2)))
-                {
                     break;
-                }
 
                 Relation relation = polygon.relations.First(x => (x.first_segment.p1 == polygon.segments[i].p1 && x.first_segment.p2 == polygon.segments[i].p2));
 

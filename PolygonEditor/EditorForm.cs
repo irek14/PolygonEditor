@@ -259,13 +259,13 @@ namespace PolygonEditor
         private void PaintAll()
         {
             if (drawCurrentLine)
-                BrenshamDrawLine(pen, current_line.Item1, current_line.Item2);
+                BresenhamDrawLine(pen, current_line.Item1, current_line.Item2);
             foreach (Polygon polygon in polygons)
             {
                 PaintGraphics(polygon);
                 PaintAllPoints(Brushes.Black, polygon);
                 foreach (var segment in polygon.segments)
-                    BrenshamDrawLine(pen, segment.p1, segment.p2);
+                    BresenhamDrawLine(pen, segment.p1, segment.p2);
             }
 
             if (first_to_relation.p1.X != -1)
