@@ -19,12 +19,16 @@ Zmiana funkcjonalności odbywa się poprzez wybór odpowiedniego trybu z menu zn
 ### Przyjęte założenia
 * <b>Rysowanie</b> - pierwsza krawędź jest rysowana wyłącznie wtedy, gdy użytkwonik wykona ruch myszką z przytrzymanym lewym przyciskiem. Po narysowaniu pierwszej krawędzi kolejne można rysować przesuwając myszką z wciśniętym lewym przyciskiem, co gwarantuje nam podgląd obecnie rysowanie krawędzi, lub poprzez kliknięcie w dowolne miejsce na ekranie - wtedy poprzedni wierzchołek zostanie połączony z nowym autormatycznie. Ponadto program obsługuje mechanizm "inteligentego kończenia wielokąta", gdy rysowana krawędź znajdzie się w otoczeniu wierzhchołka początkowego. Ponadto rysowanie wielokąta można przerwać w trakcie i powrócić do niego później z innego trybu. Wtedy jednak zanim użytkownik narysuje kolejny wielokąt będzie zmuszczony do dokończenia poprzedniego rozpoczętej konstrukcji.
 * <b>Relacje</b> - jedna krawędź może być jednocześnie wyłącznie w jednej relacji
+* <b>Przeuswanie wielokąta</b> - rozpoczyna się po naciśnięciu na jedną z krawędzi wielokąta
 
 ### Opis algorytmu relacji
 1. Określamy wierzchołek startowy, od którego rozpoczniemy sprawdzenie.
 2. Najpierw wyruszamy w lewą stronę od startowego wierzchołka przyjmując za krawędź początkową krawędź , której jest on prawym punktem</br>
-  I Sprawdzamy czy dana krawędź jest w relacji z dowolną inną krawędzią.</br>
-  II Jeśli nie jest, możemy zakończyć pętle.</br>
+  I Sprawdzamy, czy obecnie relacje są zachowane, jeśli tak, przerywamy pętle i zwracamy wielokąt uzyskany w wyniku modyfikacji<br/>
+  II Sprawdzamy czy dana krawędź jest w relacji z dowolną inną krawędzią.</br>
+  III Jeśli nie jest, sprawdzamy, czy relacje w wielokącie się zachowane</br>
+      a) Jeśli tak, zwracamy zmodyfikowany wielokąt.<br/>
+      b) Jeśli nie, przechodzimy do punktu IV<br/>
   III Jeśli jest, poprawiamy relację względem drugiej krawędzi w relacji, czyli tak modyfikujemy naszą obecną krawędź by była prostopadła/równa krawędzi drugiej</br>
   IV Zmieniamy obecną krawędź na następną z lewej i wracamy do kroku I.
  3. Powtarzamy krok dwa, tyle że tym razem poruszamy się w prawo
