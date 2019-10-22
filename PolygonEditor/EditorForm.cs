@@ -20,6 +20,36 @@ namespace PolygonEditor
         public EditorForm()
         {
             InitializeComponent();
+
+            //Add mock polygon
+            List<Point> mockApex = new List<Point>();
+            mockApex.Add(new Point(289, 48));
+            mockApex.Add(new Point(226, 371));
+            mockApex.Add(new Point(383, 449));
+            mockApex.Add(new Point(644, 466));
+            mockApex.Add(new Point(660, 347));
+            mockApex.Add(new Point(453, 314));
+            mockApex.Add(new Point(665, 169));
+            mockApex.Add(new Point(524, 64));
+            List<(Point, Point)> mockSegments = new List<(Point, Point)>();
+            for(int i=0; i<mockApex.Count; i++)
+            {
+                mockSegments.Add((mockApex[i], mockApex[(i + 1) % mockApex.Count]));
+            }
+            List<Relation> mockRelations = new List<Relation>();
+            mockRelations.Add(new Relation(RelationTypes.Perpendicular, mockSegments[0], mockSegments[4]));
+            mockRelations.Add(new Relation(RelationTypes.Perpendicular, mockSegments[4], mockSegments[0]));
+            mockRelations.Add(new Relation(RelationTypes.SameLength, mockSegments[1], mockSegments[6]));
+            mockRelations.Add(new Relation(RelationTypes.SameLength, mockSegments[6], mockSegments[1]));
+
+            Polygon mockPolygon = new Polygon
+            {
+                apex = mockApex,
+                segments = mockSegments,
+                relations = mockRelations,
+                start_point = mockApex[0]
+            };
+            polygons.Add(mockPolygon);
         }
 
         bool drawCurrentLine = false;
@@ -200,7 +230,14 @@ namespace PolygonEditor
         {
             foreach(var apex in polygon.apex)
             {
-                graph.FillRectangle(brush, apex.X-2, apex.Y-2, 4, 4);
+                try
+                {
+                    graph.FillRectangle(brush, apex.X - 2, apex.Y - 2, 4, 4);
+                }
+                catch(Exception e)
+                {
+
+                }
             }  
         }
 
