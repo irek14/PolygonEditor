@@ -187,7 +187,11 @@ namespace PolygonEditor
                     return null;
 
                 if (!polygon.relations.Any(x => (x.first_segment.p1 == polygon.segments[i].p1 && x.first_segment.p2 == polygon.segments[i].p2)))
-                    break;
+                {
+                    if (!CheckAllRelation(polygon))
+                        return null;
+                    else break;
+                }
 
                 Relation relation = polygon.relations.First(x => (x.first_segment.p1 == polygon.segments[i].p1 && x.first_segment.p2 == polygon.segments[i].p2));
 
@@ -219,7 +223,11 @@ namespace PolygonEditor
                     return null;
 
                 if (!polygon.relations.Any(x => (x.first_segment.p1 == polygon.segments[i].p1 && x.first_segment.p2 == polygon.segments[i].p2)))
-                    break;
+                {
+                    if (!CheckAllRelation(polygon))
+                        return null;
+                    else break;
+                }
 
                 Relation relation = polygon.relations.First(x => (x.first_segment.p1 == polygon.segments[i].p1 && x.first_segment.p2 == polygon.segments[i].p2));
 

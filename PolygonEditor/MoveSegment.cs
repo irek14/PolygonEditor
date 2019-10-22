@@ -34,16 +34,12 @@ namespace PolygonEditor
             Polygon newPolygon = RelationPossible(tmp, index1);
             if(newPolygon == null)
             {
-                MessageBox.Show("This operation is blocked because of the polygon relations", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                current_mode = Mode.MoveVertexStart;
                 return;
             }
 
             newPolygon = RelationPossible(tmp, index2);
             if (newPolygon == null)
             {
-                MessageBox.Show("This operation is blocked because of the polygon relations", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                current_mode = Mode.MoveVertexStart;
                 return;
             }
 

@@ -27,8 +27,7 @@ namespace PolygonEditor
 
             if(newPolygon == null)
             {
-                MessageBox.Show("This operation is blocked because of the polygon relations", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                current_mode = Mode.MoveVertexStart;
+                return;
             }
             else
             {
