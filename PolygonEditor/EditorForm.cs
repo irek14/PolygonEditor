@@ -323,6 +323,9 @@ namespace PolygonEditor
 
             foreach (ToolStripMenuItem menu_item in Menu.Items)
             {
+                if (menu_item.Text == "Line algorithm")
+                    continue;
+
                 foreach (ToolStripMenuItem item in menu_item.DropDown.Items)
                 {
                     if (item.Text == "Draw")

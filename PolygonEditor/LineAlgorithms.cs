@@ -252,7 +252,14 @@ namespace PolygonEditor
                 if (alpha > 255) alpha = 255;
                 if (alpha < 0) alpha = 0;
                 Color color = Color.FromArgb(alpha, foreColor);
-                graphics.FillRectangle(new SolidBrush(color), (int)x, (int)y, 1, 1);
+                try
+                {
+                    graphics.FillRectangle(new SolidBrush(color), (int)x, (int)y, 1, 1);
+                }
+                catch(Exception e)
+                {
+
+                }
             }
 
             int ipart(double x) { return (int)x; }
