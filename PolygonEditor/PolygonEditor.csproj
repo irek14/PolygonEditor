@@ -67,6 +67,9 @@
     <Compile Include="EditorForm.Designer.cs">
       <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LineAlgorithms.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MovePolygon.cs">
       <SubType>Form</SubType>
     </Compile>

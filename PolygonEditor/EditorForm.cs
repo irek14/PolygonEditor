@@ -17,6 +17,8 @@ namespace PolygonEditor
     public partial class EditorForm : Form
     {
         enum Mode { None, FirstPoint, Draw, DeleteVertex, DeletePolygon,DeleteRelation, MovePolygonStart, MovePolygon, MoveVertexStart, MoveVertex, MoveSegmentStart, MoveSegment, AddVertex, AddSameLengthRelation, AddPerpendicularRelation};
+
+        enum LineAlgorithm { Bresenham, Library, AntialiasingWU, BresenhamSymetry};
         public EditorForm()
         {
             InitializeComponent();
@@ -59,6 +61,7 @@ namespace PolygonEditor
         List<Polygon> polygons = new List<Polygon>();
         Polygon current_polygon;
         Mode current_mode = Mode.FirstPoint;
+        LineAlgorithm current_line_algorithm = LineAlgorithm.Bresenham;
         Graphics graph;
         (Point, Point) current_line;
 
@@ -296,13 +299,13 @@ namespace PolygonEditor
         private void PaintAll()
         {
             if (drawCurrentLine)
-                BresenhamDrawLine(pen, current_line.Item1, current_line.Item2);
+                MyDrawLine(pen, current_line.Item1, current_line.Item2);
             foreach (Polygon polygon in polygons)
             {
                 PaintGraphics(polygon);
                 PaintAllPoints(Brushes.Black, polygon);
                 foreach (var segment in polygon.segments)
-                    BresenhamDrawLine(pen, segment.p1, segment.p2);
+                    MyDrawLine(pen, segment.p1, segment.p2);
             }
 
             if (first_to_relation.p1.X != -1)
@@ -386,11 +389,28 @@ namespace PolygonEditor
         {
             foreach(ToolStripMenuItem menu_item in Menu.Items)
             {
+                if (menu_item.Text == "Line algorithm")
+                    continue;
+
                 foreach(ToolStripMenuItem item in menu_item.DropDown.Items)
                 {
                     item.Checked = false;
                    
                 }                            
+            }
+            selectedMenuItem.Checked = true;
+        }
+
+        public void UncheckOtherToolStripLineAlgorithmsItems(ToolStripMenuItem selectedMenuItem)
+        {
+            foreach (ToolStripMenuItem menu_item in Menu.Items)
+            {
+                if(menu_item.Text == "Line algorithm")
+                    foreach (ToolStripMenuItem item in menu_item.DropDown.Items)
+                    {
+                        item.Checked = false;
+
+                    }
             }
             selectedMenuItem.Checked = true;
         }
@@ -412,7 +432,30 @@ namespace PolygonEditor
             UncheckOtherToolStripMenuItems((ToolStripMenuItem)sender);
         }
 
-        #endregion
+        private void bresenhamAlgorithmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            current_line_algorithm = LineAlgorithm.Bresenham;
+            UncheckOtherToolStripLineAlgorithmsItems((ToolStripMenuItem)sender);
+        }
 
+        private void libraryAlgorithmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckOtherToolStripLineAlgorithmsItems((ToolStripMenuItem)sender);
+            current_line_algorithm = LineAlgorithm.Library;
+        }
+
+        private void bresenhamSymetryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckOtherToolStripLineAlgorithmsItems((ToolStripMenuItem)sender);
+            current_line_algorithm = LineAlgorithm.BresenhamSymetry;
+        }
+
+        private void antialiasingWUToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckOtherToolStripLineAlgorithmsItems((ToolStripMenuItem)sender);
+            current_line_algorithm = LineAlgorithm.AntialiasingWU;
+        }
+
+        #endregion
     }
 }
